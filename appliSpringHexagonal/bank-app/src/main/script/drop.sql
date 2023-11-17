@@ -1,0 +1,14 @@
+drop table if exists account_entity cascade ;
+drop table if exists account_entity cascade ;
+drop table if exists account_entity cascade ;
+drop table if exists account_entity cascade ;
+drop table if exists account_entity cascade ;
+drop table if exists account_entity cascade ;
+drop table account_entity if exists;
+drop table if exists account_entity cascade ;
+drop table if exists account_entity cascade ;
+drop table if exists account_entity cascade ;
+drop table if exists account_entity cascade ;
+drop table if exists account_entity cascade ;
+drop table if exists account cascade ;
+drop table if exists account cascade ;

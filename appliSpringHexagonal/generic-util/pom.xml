@@ -16,13 +16,11 @@
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context</artifactId>
-		    <scope>provided</scope> <!-- provided by main bank-app project -->
 		</dependency>
 		
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
-		     <scope>provided</scope> <!-- provided by main bank-app project -->
 		</dependency>
 		
 		<dependency>

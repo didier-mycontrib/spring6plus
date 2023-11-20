@@ -26,4 +26,9 @@ public class AccountSavingAdapter implements AccountSaving {
 		accountRepository.deleteById(Long.parseLong(id));
 	}
 
+	@Override
+	public void remove(Account entity) {
+		accountRepository.delete(EntityConverter.INSTANCE.map(entity,AccountEntity.class));
+	}
+
 }

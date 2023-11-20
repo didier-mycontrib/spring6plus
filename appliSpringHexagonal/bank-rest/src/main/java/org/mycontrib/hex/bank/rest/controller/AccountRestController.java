@@ -1,5 +1,7 @@
 package org.mycontrib.hex.bank.rest.controller;
 
+import java.util.List;
+
 import org.mycontrib.hex.bank.domain.api.ag.AccountService;
 import org.mycontrib.hex.bank.domain.entity.Account;
 import org.mycontrib.hex.bank.rest.adapter.DtoConverter;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +40,19 @@ public class AccountRestController {
 			Account account = accountService.getById(id); //may throwing NotFoundDomainException
 			return DtoConverter.INSTANCE.map(account,AccountL0.class);
 	}
+	// URL= ./rest/bank-api/account/
+	//   or ./rest/bank-api/account?minBalance=0.0
+	@GetMapping("")
+	public List<AccountL0> getAccountDtoByCriteria(
+			    @RequestParam(value="minBalance",required=false) Double minBalalance) 
+					throws NotFoundDomainException {			
+		    List<Account> accounts = null;
+		    if(minBalalance!=null)
+		    	accounts=accountService.queryAccountsByMinimunBalance(minBalalance);
+		    else
+		    	accounts=accountService.queryAll(); 
+			return DtoConverter.INSTANCE.map(accounts,AccountL0.class);
+	}
 			
 
 	// URL= ./rest/bank-api/account/1_or_other_id
@@ -45,52 +63,34 @@ public class AccountRestController {
 		accountService.deleteById(id);//may throwing NotFoundDomainException
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
-/*
-		//exemple de fin d'URL: ./rest/api-bank/compte
-		//                      ./rest/api-bank/compte?soldeMini=0
-	    //                      ./rest/api-bank/compte?customerId=1
-		@GetMapping("" )
-		@PreAuthorize("hasRole('ROLE_CUSTOMER') || hasRole('ROLE_ADMIN')")
-		public List<CompteL1> getComptes(
-				 @RequestParam(value="soldeMini",required=false) Double soldeMini,
-				 @RequestParam(value="customerId",required=false) Long customerId){
-			if(soldeMini!=null)
-				return dtoConverter.map(
-						serviceCompte.rechercherSelonSoldeMini(soldeMini),CompteL1.class);
-			else if(customerId!=null)
-			    return dtoConverter.map(
-			    		serviceCompte.rechercherComptesDuClient(customerId),CompteL1.class);
-			else
-			 return serviceCompte.searchAllDto(CompteL1.class);
-		}
+
 		
 		
-		
-		//exemple de fin d'URL: ./rest/api-bank/compte
-		//appelé en mode POST avec dans la partie invisible "body" de la requête:
-		// { "numero" : null , "label" : "compteQuiVaBien" , "solde" : 50.0 , "numeroClient" : 1}
-		// ou bien { "label" : "compteQuiVaBien" , "solde" : 50.0  , "numeroClient" : null}
-		@PostMapping("" ) //NOUVELLE VERSION avec CompteDtoEx et .numeroClient (éventuellement null)
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
-		public CompteL1 postCompte(@RequestBody CompteL1 nouveauCompte) {
-		    //on s'appuie ici sur la méthode spécifique ci dessous du serviceCompte
-			return serviceCompte.saveNewFromDto(nouveauCompte);
-		}
+	//URL: ./rest/bank-api/account
+	//appelé en mode POST avec dans la partie invisible "body" de la requête:
+	// { "id" : null , "label" : "compteQuiVaBien" , "balance" : 50.0 }
+	// ou bien { "label" : "compteQuiVaBien" , "balance" : 50.0 }
+	@PostMapping("" )
+	public AccountL0 postCompte(@RequestBody AccountL0 newAccountDto) {
+		Account savedAccount = accountService.create(DtoConverter.INSTANCE.map(newAccountDto,Account.class));
+		newAccountDto.setId(savedAccount.getId());
+		return newAccountDto;
+	}
 		
 		
 			
-			//exemple de fin d'URL: ./rest/api-bank/compte
-			//ou bien               ./rest/api-bank/compte/5
-			//appelé en mode PUT avec dans la partie invisible "body" de la requête:
-			// { "numero" : 5 , "label" : "compte5QueJaime" , "solde" : 150.0 , "numeroClient" : null}
-			//ou bien {  "label" : "compte5QueJaime" , "solde" : 150.0 , "numeroClient" : 1}
-			@PutMapping({"" , "/{id}" }) 
-			@PreAuthorize("hasRole('ROLE_ADMIN')")
-			public CompteL1 putCompteToUpdate(@RequestBody CompteL1 compteDto , 
-					      @PathVariable(value="id",required = false ) Long idToUpdate) {
-				    if(compteDto.getNumero()==null)	compteDto.setNumero(idToUpdate);
-					serviceCompte.updateExistingFromDto(compteDto); //remonte NotFoundException si pas trouvé
-					return compteDto;
-			}
-*/
+	//exemple de fin d'URL: ./rest/bank-api/account
+	//ou bien               ./rest/bank-api/account/5
+	//appelé en mode PUT avec dans la partie invisible "body" de la requête:
+	// { "id" : 5 , "label" : "compte5QueJaime" , "balance" : 150.0 }
+		
+	@PutMapping({"" , "/{id}" }) 
+	public AccountL0 putCompteToUpdate(@RequestBody AccountL0 accountDto , 
+		      @PathVariable(value="id",required = false ) String idToUpdate) {
+		if(accountDto.getId()==null)	
+			accountDto.setId(idToUpdate);
+		accountService.update(DtoConverter.INSTANCE.map(accountDto,Account.class)); //remonte NotFoundException si pas trouvé
+		return accountDto;
+	}
+
 }

@@ -97,8 +97,12 @@ public class AccountServiceImpl implements AccountService{
 
 	@Override
 	public void remove(Account entity) {
-		// TODO Auto-generated method stub
-		
+		accountSaver.remove(entity);
+	}
+
+	@Override
+	public List<Account> queryAccountsByMinimunBalance(Double minimumBalance) {
+		return accountLoader.loadWithMinimumBalance(minimumBalance);
 	}
 
 }

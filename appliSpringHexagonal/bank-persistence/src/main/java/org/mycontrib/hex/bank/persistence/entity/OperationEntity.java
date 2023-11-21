@@ -1,5 +1,6 @@
 package org.mycontrib.hex.bank.persistence.entity;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -27,7 +28,9 @@ public class OperationEntity {
 	
 	private Double amount;
 	private String label;
-	private String timestamp;//au format YYYY-MM-ddTHH:MM:SS
+	
+	//private String timestamp;//au format YYYY-MM-ddTHH:MM:SS
+	private LocalDateTime timestamp;
 	
 	@ManyToOne
 	@JoinColumn(name="account_id")
@@ -35,7 +38,7 @@ public class OperationEntity {
 	
 	
 
-	public OperationEntity(UUID id, Double amount, String label, String timestamp, AccountEntity account) {
+	public OperationEntity(UUID id, Double amount, String label, LocalDateTime timestamp, AccountEntity account) {
 		super();
 		this.id = id;
 		this.amount = amount;
@@ -44,7 +47,7 @@ public class OperationEntity {
 		this.account = account;
 	}
 	
-	public OperationEntity(UUID id, Double amount, String label, String timestamp) {
+	public OperationEntity(UUID id, Double amount, String label, LocalDateTime timestamp) {
 		this(id,amount,label,timestamp,null);
 	}
 

@@ -51,19 +51,19 @@ public class InitDataSet {
 		compteAa = accountService.create(compteAa);
 		//System.out.println("compteAa="+compteAa);
 		
-		Operation opAa0 = new Operation(null,-38.7 ,"achat Aa0","2023-09-25");
+		Operation opAa0 = new Operation(null,-38.7 ,"achat Aa0","2023-07-25T00:00");
 		opAa0 = operationService.registerOperationForAccount(opAa0, compteAa.getId());
 		
-		Operation opAa1 = new Operation(null,-5.9 ,"achat Aa1","2023-10-23");
+		Operation opAa1 = new Operation(null,-5.9 ,"achat Aa1","2023-08-23T00:00");
 		opAa1 = operationService.registerOperationForAccount(opAa1, compteAa.getId());
 		//System.out.println("opAa1="+opAa1);
-		Operation opAa2 = new Operation(null,-3.9 ,"achat Aa2","2023-11-06");
+		Operation opAa2 = new Operation(null,-3.9 ,"achat Aa2","2023-11-06T00:00");
 		opAa2 = operationService.registerOperationForAccount(opAa2, compteAa.getId());
 		
 		Account compteBbb = new Account(null,"compte_Bbb" , 80.0);
 		compteBbb = accountService.create(compteBbb);
 		
-		Operation opBbb1 = new Operation(null,-8.9 ,"achat bbb1","2023-10-12");
+		Operation opBbb1 = new Operation(null,-8.9 ,"achat bbb1","2023-10-12T00:00");
 		opBbb1 = operationService.registerOperationForAccount(opBbb1, compteBbb.getId());
 	
     	

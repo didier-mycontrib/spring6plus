@@ -19,7 +19,7 @@ public class EntityConverter extends AbstractGenericConverter {
 	}
 	
 	public OperationEntity operationToOperationEntity(Operation o) {
-		OperationEntity oe= new OperationEntity(stringToUuid(o.getId()),o.getAmount(),o.getLabel(),o.getTimestamp());
+		OperationEntity oe= new OperationEntity(stringToUuid(o.getId()),o.getAmount(),o.getLabel(),stringToLocalDateTime(o.getTimestamp()));
 		Account account = o.getAccount();
 		if(account!=null) {
 			oe.setAccount(accountToAccountEntity(account));
@@ -28,7 +28,7 @@ public class EntityConverter extends AbstractGenericConverter {
 	}
 	
 	public Operation operationEntityToOperation(OperationEntity oe) {
-		Operation o= new Operation(uuidToString(oe.getId()),oe.getAmount(),oe.getLabel(),oe.getTimestamp());
+		Operation o= new Operation(uuidToString(oe.getId()),oe.getAmount(),oe.getLabel(),localDateTimeToString(oe.getTimestamp()));
 		AccountEntity accountEntity = oe.getAccount();
 		if(accountEntity!=null) {
 			o.setAccount(accountEntityToAccount(accountEntity));

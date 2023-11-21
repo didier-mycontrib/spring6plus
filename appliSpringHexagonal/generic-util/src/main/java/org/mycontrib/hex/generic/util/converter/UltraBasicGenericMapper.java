@@ -1,5 +1,6 @@
 package org.mycontrib.hex.generic.util.converter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -56,6 +57,14 @@ public class UltraBasicGenericMapper {
 	
 	public String uuidToString(UUID u) {
 		return u!=null?u.toString():null;
+	}
+	
+	public LocalDateTime stringToLocalDateTime(String s){
+		return s!=null?LocalDateTime.parse(s):null;
+	}
+	
+	public String localDateTimeToString(LocalDateTime ldt) {
+		return ldt!=null?ldt.toString():null;
 	}
 
 }

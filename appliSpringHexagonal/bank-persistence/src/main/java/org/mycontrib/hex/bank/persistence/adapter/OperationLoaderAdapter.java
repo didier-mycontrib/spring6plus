@@ -1,5 +1,8 @@
 package org.mycontrib.hex.bank.persistence.adapter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,7 +37,22 @@ public class OperationLoaderAdapter implements OperationLoader {
 
 	@Override
 	public List<Operation> loadByAccountAndPeriod(String accountId, String beginDate, String endDate) {
-		List<OperationEntity> opEntities = operationRepository.findAll();
+		List<OperationEntity> opEntities = null;
+		//opEntities = operationRepository.findAll();
+		if(accountId==null) return new ArrayList<Operation>();
+		Long lAccountId = EntityConverter.INSTANCE.stringToLong(accountId);
+		
+		if(beginDate==null) {
+			opEntities = operationRepository.findByAccountId(lAccountId);
+		}
+		else {
+			LocalDateTime ldtBeginDate  = (LocalDate.parse(beginDate)).atStartOfDay();
+			LocalDateTime ldtEndDate  = LocalDateTime.now(); //by default
+			if(endDate!=null)
+			    ldtEndDate  = (LocalDate.parse(endDate)).atTime(23, 59);
+			//opEntities = operationRepository.findByTimestampBetween(ldtBeginDate,ldtEndDate);
+			opEntities = operationRepository.findByAccountIdAndTimestampBetween(lAccountId,ldtBeginDate,ldtEndDate);
+		}
 		return EntityConverter.INSTANCE.map(opEntities, Operation.class);
 	}
 

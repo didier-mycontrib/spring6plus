@@ -43,28 +43,41 @@ public class InitDataSet {
 		c1.setContactDetails(new ContactDetails("jean.bon@worldcompany.com","0601020304", "12 rue elle 75001 Paris"));
 		customerService.create(c1);
 		
+			Account compteAa = new Account(null,"compte_Aa" , 70.0);
+			compteAa.addCustomerOwnership(c1.getId());
+			compteAa = accountService.create(compteAa);
+			//System.out.println("compteAa="+compteAa);
+			
+				Operation opAa0 = new Operation(null,-38.7 ,"achat Aa0","2023-07-25T00:00");
+				opAa0 = operationService.registerOperationForAccount(opAa0, compteAa.getId());
+				
+				Operation opAa1 = new Operation(null,-5.9 ,"achat Aa1","2023-08-23T00:00");
+				opAa1 = operationService.registerOperationForAccount(opAa1, compteAa.getId());
+				//System.out.println("opAa1="+opAa1);
+				Operation opAa2 = new Operation(null,-3.9 ,"achat Aa2","2023-11-06T00:00");
+				opAa2 = operationService.registerOperationForAccount(opAa2, compteAa.getId());
+			
+			Account compteBbb = new Account(null,"compte_Bbb" , 80.0);
+			compteBbb.addCustomerOwnership(c1.getId());
+			compteBbb = accountService.create(compteBbb);
+			
+				Operation opBbb1 = new Operation(null,-8.9 ,"achat bbb1","2023-10-12T00:00");
+				opBbb1 = operationService.registerOperationForAccount(opBbb1, compteBbb.getId());
+		
 		Customer c2 = new Customer(null,"axelle","aire","pwd2");
 		c2.setContactDetails(new ContactDetails("axelle.aire@bestcompany.com","0604030201", "2 rue quiVaBien 69001 Lyon"));
 		customerService.create(c2);
 		
-		Account compteAa = new Account(null,"compte_Aa" , 70.0);
-		compteAa = accountService.create(compteAa);
-		//System.out.println("compteAa="+compteAa);
+			Account compteCc = new Account(null,"compte_Cc" , 60.0);
+			compteCc.addCustomerOwnership(c2.getId());
+			compteCc = accountService.create(compteCc);
+			
+			Account compteDd = new Account(null,"compte_Dd" , 90.0);
+			compteDd.addCustomerOwnership(c2.getId());
+			compteDd.addCustomerOwnership(c1.getId());
+			compteDd = accountService.create(compteDd);
 		
-		Operation opAa0 = new Operation(null,-38.7 ,"achat Aa0","2023-07-25T00:00");
-		opAa0 = operationService.registerOperationForAccount(opAa0, compteAa.getId());
 		
-		Operation opAa1 = new Operation(null,-5.9 ,"achat Aa1","2023-08-23T00:00");
-		opAa1 = operationService.registerOperationForAccount(opAa1, compteAa.getId());
-		//System.out.println("opAa1="+opAa1);
-		Operation opAa2 = new Operation(null,-3.9 ,"achat Aa2","2023-11-06T00:00");
-		opAa2 = operationService.registerOperationForAccount(opAa2, compteAa.getId());
-		
-		Account compteBbb = new Account(null,"compte_Bbb" , 80.0);
-		compteBbb = accountService.create(compteBbb);
-		
-		Operation opBbb1 = new Operation(null,-8.9 ,"achat bbb1","2023-10-12T00:00");
-		opBbb1 = operationService.registerOperationForAccount(opBbb1, compteBbb.getId());
 	
     	
 	}

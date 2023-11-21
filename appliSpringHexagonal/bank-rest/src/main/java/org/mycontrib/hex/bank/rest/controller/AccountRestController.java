@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.mycontrib.hex.bank.domain.api.ag.AccountService;
 import org.mycontrib.hex.bank.domain.entity.Account;
-import org.mycontrib.hex.bank.rest.adapter.DtoConverter;
-import org.mycontrib.hex.bank.rest.dto.AccountL0;
 import org.mycontrib.hex.generic.domain.exception.NotFoundDomainException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,16 +42,20 @@ public class AccountRestController {
 	}
 	// URL= ./rest/bank-api/account/
 	//   or ./rest/bank-api/account?minBalance=0.0
+	//   or ./rest/bank-api/account?customerId=1
 	@GetMapping("")
 	public List<Account> getAccountDtoByCriteria(
-			    @RequestParam(value="minBalance",required=false) Double minBalalance) 
+			    @RequestParam(value="minBalance",required=false) Double minBalance,
+			    @RequestParam(value="customerId",required=false) String customerId) 
 					throws NotFoundDomainException {			
 		    List<Account> accounts = null;
-		    if(minBalalance!=null)
-		    	accounts=accountService.queryAccountsByMinimunBalance(minBalalance);
+		    if(customerId!=null)
+		    	accounts=accountService.queryAccountsByCustomerOwnerships(customerId);
+		    else
+		      if(minBalance!=null)
+			    	accounts=accountService.queryAccountsByMinimunBalance(minBalance);
 		    else
 		    	accounts=accountService.queryAll(); 
-			//return DtoConverter.INSTANCE.map(accounts,AccountL0.class);
 		    return accounts;
 	}
 			
@@ -74,13 +76,6 @@ public class AccountRestController {
 	// { "id" : null , "label" : "compteQuiVaBien" , "balance" : 50.0 }
 	// ou bien { "label" : "compteQuiVaBien" , "balance" : 50.0 }
 	@PostMapping("" )
-	/*
-	public AccountL0 postCompte(@RequestBody AccountL0 newAccountDto) {
-		Account savedAccount = accountService.create(DtoConverter.INSTANCE.map(newAccountDto,Account.class));
-		newAccountDto.setId(savedAccount.getId());
-		return newAccountDto;
-	}
-	*/
 	public Account postAccount(@RequestBody Account newAccount) {
 		Account savedAccount = accountService.create(newAccount);
 		return savedAccount;
@@ -93,15 +88,6 @@ public class AccountRestController {
 	// { "id" : 5 , "label" : "compte5QueJaime" , "balance" : 150.0 }
 		
 	@PutMapping({"" , "/{id}" }) 
-	/*
-	public AccountL0 putCompteToUpdate(@RequestBody AccountL0 accountDto , 
-		      @PathVariable(value="id",required = false ) String idToUpdate) {
-		if(accountDto.getId()==null)	
-			accountDto.setId(idToUpdate);
-		accountService.update(DtoConverter.INSTANCE.map(accountDto,Account.class)); //remonte NotFoundException si pas trouvé
-		return accountDto;
-	}
-	*/
 	public Account putAccountToUpdate(@RequestBody Account account , 
 		      @PathVariable(value="id",required = false ) String idToUpdate) {
 		if(account.getId()==null)	

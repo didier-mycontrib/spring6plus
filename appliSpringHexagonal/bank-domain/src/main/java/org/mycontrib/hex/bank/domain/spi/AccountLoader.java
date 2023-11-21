@@ -17,4 +17,5 @@ public interface AccountLoader extends Loader<Account,String>{
 	 */
 	
 	public List<Account> loadWithMinimumBalance(Double minBalance);
+	public List<Account> loadByCustomerOwnerships(String customerId);
 }

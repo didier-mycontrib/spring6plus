@@ -1,11 +1,15 @@
 package org.mycontrib.hex.bank.persistence.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -28,6 +32,9 @@ public class CustomerEntity {
 	
 	@OneToOne(optional=true,mappedBy="customer",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	private ContactDetailsEntity contactDetails;//may be null if not known or not specified or not attached
+	
+	@OneToMany(mappedBy="customer",fetch = FetchType.LAZY)
+	private List<AccountOwnershipEntity> accountOwnerships = new ArrayList<AccountOwnershipEntity>();
 	
 	@Override
 	public String toString() {

@@ -1,9 +1,17 @@
 package org.mycontrib.hex.bank.persistence.adapter;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.mycontrib.hex.bank.domain.entity.Account;
+import org.mycontrib.hex.bank.domain.entity.AccountOwnership;
 import org.mycontrib.hex.bank.domain.spi.AccountSaver;
 import org.mycontrib.hex.bank.persistence.dao.AccountJpaRepository;
+import org.mycontrib.hex.bank.persistence.dao.AccountOwnershipJpaRepository;
+import org.mycontrib.hex.bank.persistence.dao.CustomerJpaRepository;
 import org.mycontrib.hex.bank.persistence.entity.AccountEntity;
+import org.mycontrib.hex.bank.persistence.entity.AccountOwnershipEntity;
+import org.mycontrib.hex.bank.persistence.entity.CustomerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,11 +20,32 @@ public class AccountSaverAdapter implements AccountSaver {
 	
 	@Autowired
 	private AccountJpaRepository accountRepository;
+	
+	@Autowired
+	private CustomerJpaRepository customerRepository;
+	
+	@Autowired
+	private AccountOwnershipJpaRepository accountOwnershipRepository;
 
 	@Override
 	public Account saveNew(Account account) {
 		AccountEntity accountEntity = EntityConverter.INSTANCE.accountToAccountEntity(account);
-		accountRepository.save(accountEntity);
+		accountEntity = accountRepository.save(accountEntity);
+		
+		List<AccountOwnership> accountOwnerships= account.getAccountOwnerships();
+		if(accountOwnerships!=null && !accountOwnerships.isEmpty()) {
+			for(AccountOwnership accountOwnership : accountOwnerships) {
+				//System.out.println("accountOwnership="+accountOwnership);
+				//System.out.println("\t accountEntity="+accountEntity);
+				CustomerEntity customerEntity =  customerRepository.findById(Long.parseLong( accountOwnership.getCustomerId())).get();
+				//System.out.println("\t customerEntity="+customerEntity);
+				AccountOwnershipEntity accountOwnershipEntity = 
+						new AccountOwnershipEntity(accountEntity,customerEntity,
+													LocalDate.parse(accountOwnership.getBeginDate()));
+				accountOwnershipRepository.save(accountOwnershipEntity);
+			}
+		}
+		
 		account.setId(String.valueOf(accountEntity.getId()));
 		return account;
 	}

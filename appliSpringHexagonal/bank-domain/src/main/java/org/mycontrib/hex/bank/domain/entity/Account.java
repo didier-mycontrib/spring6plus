@@ -1,5 +1,6 @@
 package org.mycontrib.hex.bank.domain.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +23,12 @@ public class Account implements WithId<String>{
 	private String label;
 	private Double balance;
 	
-	private List<AccountOwnership> AccountOwnerships = new ArrayList<AccountOwnership>();
+	private List<AccountOwnership> accountOwnerships = new ArrayList<AccountOwnership>();
+	
+	public void addCustomerOwnership(String customerId) {
+		AccountOwnership accountOwnership= new AccountOwnership(id,customerId,LocalDate.now().toString(),null);
+		accountOwnerships.add(accountOwnership);
+	}
 	
 	
 	public Account(String id, String label, Double balance) {

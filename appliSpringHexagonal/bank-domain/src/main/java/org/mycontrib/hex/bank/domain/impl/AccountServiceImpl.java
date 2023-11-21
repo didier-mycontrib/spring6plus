@@ -40,7 +40,7 @@ public class AccountServiceImpl extends GenericQueryingAndLifeCycleAbstract<Acco
 	}
 
 	@Override
-	public void transfer(String sourceAccountId, String targetAccountId, Double amount) {
+	public void transfer(Double amount,String sourceAccountId, String targetAccountId) {
 		debit(sourceAccountId, amount);
 		credit(targetAccountId, amount);
 	}
@@ -53,8 +53,7 @@ public class AccountServiceImpl extends GenericQueryingAndLifeCycleAbstract<Acco
 
 	@Override
 	public List<Account> queryAccountsByCustomerOwnerships(String customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		return accountLoader.loadByCustomerOwnerships(customerId);
 	}
 
 	

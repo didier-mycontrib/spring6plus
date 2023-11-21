@@ -77,13 +77,6 @@ public class CustomerRestController {
 	// { "id" : null , "label" : "compteQuiVaBien" , "balance" : 50.0 }
 	// ou bien { "label" : "compteQuiVaBien" , "balance" : 50.0 }
 	@PostMapping("" )
-	/*
-	public CustomerL0 postCompte(@RequestBody CustomerL0 newCustomerDto) {
-		Customer savedCustomer = customerService.create(DtoConverter.INSTANCE.map(newCustomerDto,Customer.class));
-		newCustomerDto.setId(savedCustomer.getId());
-		return newCustomerDto;
-	}
-	*/
 	public Customer postCustomer(@RequestBody Customer newCustomer) {
 		Customer savedCustomer = customerService.create(newCustomer);
 		return savedCustomer;
@@ -96,15 +89,6 @@ public class CustomerRestController {
 	// { "id" : 5 , "label" : "compte5QueJaime" , "balance" : 150.0 }
 		
 	@PutMapping({"" , "/{id}" }) 
-	/*
-	public CustomerL0 putCompteToUpdate(@RequestBody CustomerL0 customerDto , 
-		      @PathVariable(value="id",required = false ) String idToUpdate) {
-		if(customerDto.getId()==null)	
-			customerDto.setId(idToUpdate);
-		customerService.update(DtoConverter.INSTANCE.map(customerDto,Customer.class)); //remonte NotFoundException si pas trouvé
-		return customerDto;
-	}
-	*/
 	public Customer putCustomerToUpdate(@RequestBody Customer customer , 
 		      @PathVariable(value="id",required = false ) String idToUpdate) {
 		if(customer.getId()==null)	

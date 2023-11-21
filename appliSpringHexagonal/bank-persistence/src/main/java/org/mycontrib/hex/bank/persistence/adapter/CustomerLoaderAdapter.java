@@ -9,34 +9,24 @@ import org.mycontrib.hex.bank.persistence.dao.CustomerJpaRepository;
 import org.mycontrib.hex.bank.persistence.entity.CustomerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+//@Transactional
 public class CustomerLoaderAdapter implements CustomerLoader {
 	
 	@Autowired
 	private CustomerJpaRepository customerRepository;
 	
-	public CustomerEntity withOrWithoutDetails(CustomerEntity customerEntity,String... wishedDetails) {
-		if(customerEntity==null)
-			return null;
-		if(wishedDetails.length==0)
-			customerEntity.setContactDetails(null);
-		return customerEntity;
-	}
-	
-	public List<CustomerEntity> withOrWithoutDetails(List<CustomerEntity> customerEntities,String... wishedDetails) {
-		return customerEntities.stream()
-				.map((c)->withOrWithoutDetails(c,wishedDetails))
-				.toList();
-	}
 
 
 	@Override
 	public Optional<Customer> loadById(String id,String... wishedDetails) {
+		CustomerEntity customerEntity = customerRepository.findById(Long.parseLong(id)).orElse(null);
 		return Optional.of(
-				  EntityConverter.INSTANCE.customerEntityToCustomer(
-						  withOrWithoutDetails(customerRepository.findById(Long.parseLong(id)).orElse(null),wishedDetails)
-				      )
+				  wishedDetails.length>0
+				  ?EntityConverter.INSTANCE.customerEntityToCustomer(customerEntity)
+				  :EntityConverter.INSTANCE.customerEntityToCustomerWithoutDetails(customerEntity)
 				  );
 	}
 
@@ -47,8 +37,7 @@ public class CustomerLoaderAdapter implements CustomerLoader {
 
 	@Override
 	public List<Customer> loadAll() {
-		return EntityConverter.INSTANCE.map(withOrWithoutDetails(customerRepository.findAll()),
-				Customer.class);
+		return EntityConverter.INSTANCE.customerEntityListToCustomerListWithoutDetails(customerRepository.findAll());
 	}
 
 	

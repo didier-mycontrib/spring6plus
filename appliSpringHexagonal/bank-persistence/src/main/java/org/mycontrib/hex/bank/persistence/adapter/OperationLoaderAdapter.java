@@ -13,12 +13,15 @@ import org.mycontrib.hex.bank.persistence.dao.OperationJpaRepository;
 import org.mycontrib.hex.bank.persistence.entity.OperationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class OperationLoaderAdapter implements OperationLoader {
 	
 	@Autowired
 	private OperationJpaRepository operationRepository;
+	
 
 	@Override
 	public Optional<Operation> loadById(String id) {
@@ -53,7 +56,7 @@ public class OperationLoaderAdapter implements OperationLoader {
 			//opEntities = operationRepository.findByTimestampBetween(ldtBeginDate,ldtEndDate);
 			opEntities = operationRepository.findByAccountIdAndTimestampBetween(lAccountId,ldtBeginDate,ldtEndDate);
 		}
-		return EntityConverter.INSTANCE.map(opEntities, Operation.class);
+		return EntityConverter.INSTANCE.operationEntityListToOperationListWithoutDetails(opEntities);
 	}
 
 }

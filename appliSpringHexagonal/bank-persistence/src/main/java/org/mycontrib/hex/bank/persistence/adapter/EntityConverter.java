@@ -1,5 +1,7 @@
 package org.mycontrib.hex.bank.persistence.adapter;
 
+import java.util.List;
+
 import org.mycontrib.hex.bank.domain.entity.Account;
 import org.mycontrib.hex.bank.domain.entity.ContactDetails;
 import org.mycontrib.hex.bank.domain.entity.Customer;
@@ -27,8 +29,17 @@ public class EntityConverter extends AbstractGenericConverter {
 		return oe;
 	}
 	
-	public Operation operationEntityToOperation(OperationEntity oe) {
+	public Operation operationEntityToOperationWithoutDetails(OperationEntity oe) {
 		Operation o= new Operation(uuidToString(oe.getId()),oe.getAmount(),oe.getLabel(),localDateTimeToString(oe.getTimestamp()));
+		return o;
+	}
+	
+	public List<Operation> operationEntityListToOperationListWithoutDetails(List<OperationEntity> oel) {
+		return oel.stream().map(oe->operationEntityToOperationWithoutDetails(oe)).toList();
+	}
+	
+	public Operation operationEntityToOperation(OperationEntity oe) {
+		Operation o= operationEntityToOperationWithoutDetails(oe);
 		AccountEntity accountEntity = oe.getAccount();
 		if(accountEntity!=null) {
 			o.setAccount(accountEntityToAccount(accountEntity));
@@ -47,8 +58,17 @@ public class EntityConverter extends AbstractGenericConverter {
 		return ce;
 	}
 	
-	public Customer customerEntityToCustomer(CustomerEntity ce) {
+	public Customer customerEntityToCustomerWithoutDetails(CustomerEntity ce) {
 		Customer c =  new Customer(longToString(ce.getId()),ce.getFirstname(),ce.getLastname(),ce.getPassword());
+		return c;
+	}
+	
+	public List<Customer> customerEntityListToCustomerListWithoutDetails(List<CustomerEntity> cel) {
+		return cel.stream().map(ce->customerEntityToCustomerWithoutDetails(ce)).toList();
+	}
+	
+	public Customer customerEntityToCustomer(CustomerEntity ce) {
+		Customer c =  customerEntityToCustomerWithoutDetails(ce);
 		ContactDetailsEntity cdd = ce.getContactDetails();
 		if(cdd!=null) c.setContactDetails(new ContactDetails(cdd.getEmail(),cdd.getMobile(),cdd.getMainAddress()));
 		return c;

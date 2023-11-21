@@ -1,6 +1,6 @@
 package org.mycontrib.hex.bank.domain.entity;
 
-import java.util.UUID;
+import org.mycontrib.hex.generic.domain.entity.WithId;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,37 +10,43 @@ import lombok.Setter;
 
 
 @Getter @Setter @NoArgsConstructor
-public class Operation {
+public class Operation implements WithId<String>{
 	
 	
-	private Long idOp;
-	//private String idOp;
-	//private UUID idOp;
-	private Double montant;
+	//private Long id;
+	private String id;
+	//private UUID id;
+	private Double amount;
 	private String label;
-	private String date;
+	private String timestamp;//au format YYYY-MM-ddTHH:MM:SS
 	
-	private Account compte;
+	private Account account;
 	
 	
 
-	public Operation(/*UUID*/Long idOp, Double montant, String label, String date, Account compte) {
+	public Operation(String id, Double amount, String label, String timestamp, Account account) {
 		super();
-		this.idOp = idOp;
-		this.montant = montant;
+		this.id = id;
+		this.amount = amount;
 		this.label = label;
-		this.date = date;
-		this.compte = compte;
+		this.timestamp = timestamp;
+		this.account = account;
 	}
 	
-	public Operation(/*UUID*/Long idOp, Double montant, String label, String date) {
-		this(idOp,montant,label,date,null);
+	public Operation(String id, Double amount, String label, String timestamp) {
+		this(id,amount,label,timestamp,null);
 	}
-
 
 	@Override
 	public String toString() {
-		return "Operation [idOp=" + idOp + ", montant=" + montant + ", label=" + label + ", date=" + date + "]";
+		return "Operation [id=" + id + ", amount=" + amount + ", label=" + label + ", timestamp=" + timestamp + "]";
 	}
 
+	@Override
+	public String extractId() {
+		return id;
+	}
+
+
+	
 }

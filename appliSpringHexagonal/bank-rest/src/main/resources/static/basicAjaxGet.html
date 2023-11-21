@@ -16,6 +16,12 @@
 		<option value="./rest/bank-api/account/1">account 1 (JSON)</option>
 		<option value="./rest/bank-api/account">all accounts (JSON)</option>
 		<option value="./rest/bank-api/account?minBalance=75.0">accounts?minBalance=75.0 (JSON)</option>
+		<option value="./rest/bank-api/customer/1">customer 1 (JSON)</option>
+		<option value="./rest/bank-api/customer/1?withDetails=contact">customer 1 avec ?withDetails=contact(JSON)</option>
+		<option value="./rest/bank-api/customer">all customers (JSON)</option>
+		<option value="./rest/bank-api/customer?firstname=jean&lastname=bon">firstname=jean&lastname=bon (JSON)</option>
+		<option value="./rest/bank-api/operation/a1b345cc46...67c">operation by id (JSON)</option>
+		<option value="./rest/bank-api/operation?accountId=1">last operations for accountId=1 (JSON)</option>
    	</select> <br/>
 	relative ws url: <input id="wsUrlTxt" value="null" size="128"/> <br/>
     <input type="button" value="get (via ajax)" onclick="doBasicGet()" /><br/>

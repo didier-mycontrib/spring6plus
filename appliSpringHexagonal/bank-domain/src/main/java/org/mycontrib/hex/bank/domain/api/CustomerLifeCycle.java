@@ -1,11 +1,11 @@
 package org.mycontrib.hex.bank.domain.api;
 
-import org.mycontrib.hex.bank.domain.entity.Account;
+import org.mycontrib.hex.bank.domain.entity.Customer;
 import org.mycontrib.hex.generic.domain.api.DomainLifeCycle;
 import org.mycontrib.hex.generic.domain.exception.ConflictDomainException;
 import org.mycontrib.hex.generic.domain.exception.NotFoundDomainException;
 
-public interface AccountLifeCycle extends DomainLifeCycle<Account,String>{
+public interface CustomerLifeCycle extends DomainLifeCycle<Customer,String>{
 	/*
 	 inherited methods:
 	 

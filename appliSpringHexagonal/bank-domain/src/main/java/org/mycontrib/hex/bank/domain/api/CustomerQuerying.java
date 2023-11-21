@@ -2,11 +2,10 @@ package org.mycontrib.hex.bank.domain.api;
 
 import java.util.List;
 
-import org.mycontrib.hex.bank.domain.entity.Account;
-import org.mycontrib.hex.bank.domain.entity.Operation;
+import org.mycontrib.hex.bank.domain.entity.Customer;
 import org.mycontrib.hex.generic.domain.api.Querying;
 
-public interface AccountQuerying extends Querying<Account,String>{
+public interface CustomerQuerying extends Querying<Customer,String>{
 	/*
 	 inherited methods:
 	 
@@ -15,7 +14,6 @@ public interface AccountQuerying extends Querying<Account,String>{
 	 List<T> queryAll();
 	 */
 	
-	List<Account> queryAccountsByMinimunBalance(Double minimumBalance);
-	List<Account> queryAccountsByCustomerOwnerships(String customerId);
+	List<Customer> queryByFirstnameAndLastname(String firstName, String lastName);
 	
 }

@@ -1,13 +1,17 @@
 package org.mycontrib.hex.bank.domain.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import org.mycontrib.hex.generic.domain.entity.WithId;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor
-public class Account {
+public class Account implements WithId<String>{
 
 	private static Double authorizedOverdraft  = -500.0; //decouvertAutorise
 	
@@ -18,7 +22,8 @@ public class Account {
 	private String label;
 	private Double balance;
 	
-	//private List<Operation> operations; //+get/set
+	private List<AccountOwnership> AccountOwnerships = new ArrayList<AccountOwnership>();
+	
 	
 	public Account(String id, String label, Double balance) {
 		this.id = id;
@@ -59,6 +64,11 @@ public class Account {
 		Account other = (Account) obj;
 		return Objects.equals(balance, other.balance) && Objects.equals(id, other.id)
 				&& Objects.equals(label, other.label);
+	}
+
+	@Override
+	public String extractId() {
+		return this.id;
 	}
 
 

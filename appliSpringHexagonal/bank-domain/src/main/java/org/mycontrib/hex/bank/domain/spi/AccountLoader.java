@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.mycontrib.hex.bank.domain.entity.Account;
-import org.mycontrib.hex.generic.domain.spi.Loading;
+import org.mycontrib.hex.generic.domain.spi.Loader;
 
 //Query (readOnly) part of persistence
-public interface AccountLoading extends Loading<Account,String>{
+public interface AccountLoader extends Loader<Account,String>{
 	/*
 	 inherited methods:
 	 
-	 public Optional<T> loadById(ID id);
+	 public Optional<T> loadById(ID id,String... wishedDetails);
 	 public boolean existsWithThisId(ID id);
 	 public List<T> loadAll();
 	 */

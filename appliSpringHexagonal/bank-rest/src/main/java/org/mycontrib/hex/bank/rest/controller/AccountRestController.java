@@ -33,17 +33,19 @@ public class AccountRestController {
 	private AccountService accountService;
 	
 	// URL= ./rest/bank-api/account/1_or_other_id
-	//   or ./rest/bank-api/account/1?detailLevel=1ou2ouAutre
+	//   or ./rest/bank-api/account/1?detailsLevel=0ou1ou2ouAutre
 	@GetMapping("/{id}")
-	public AccountL0 getAccountDtoById(@PathVariable("id") String id,
-			@RequestParam(value="detailLevel",required=false) Integer detailLevel) throws NotFoundDomainException {
+	public Account getAccountDtoById(@PathVariable("id") String id,
+			@RequestParam(value="detailsLevel",required=false) Integer detailsLevel) throws NotFoundDomainException {
+		    
 			Account account = accountService.getById(id); //may throwing NotFoundDomainException
-			return DtoConverter.INSTANCE.map(account,AccountL0.class);
+            
+			return account;
 	}
 	// URL= ./rest/bank-api/account/
 	//   or ./rest/bank-api/account?minBalance=0.0
 	@GetMapping("")
-	public List<AccountL0> getAccountDtoByCriteria(
+	public List<Account> getAccountDtoByCriteria(
 			    @RequestParam(value="minBalance",required=false) Double minBalalance) 
 					throws NotFoundDomainException {			
 		    List<Account> accounts = null;
@@ -51,7 +53,8 @@ public class AccountRestController {
 		    	accounts=accountService.queryAccountsByMinimunBalance(minBalalance);
 		    else
 		    	accounts=accountService.queryAll(); 
-			return DtoConverter.INSTANCE.map(accounts,AccountL0.class);
+			//return DtoConverter.INSTANCE.map(accounts,AccountL0.class);
+		    return accounts;
 	}
 			
 
@@ -71,12 +74,17 @@ public class AccountRestController {
 	// { "id" : null , "label" : "compteQuiVaBien" , "balance" : 50.0 }
 	// ou bien { "label" : "compteQuiVaBien" , "balance" : 50.0 }
 	@PostMapping("" )
+	/*
 	public AccountL0 postCompte(@RequestBody AccountL0 newAccountDto) {
 		Account savedAccount = accountService.create(DtoConverter.INSTANCE.map(newAccountDto,Account.class));
 		newAccountDto.setId(savedAccount.getId());
 		return newAccountDto;
 	}
-		
+	*/
+	public Account postAccount(@RequestBody Account newAccount) {
+		Account savedAccount = accountService.create(newAccount);
+		return savedAccount;
+	}
 		
 			
 	//exemple de fin d'URL: ./rest/bank-api/account
@@ -85,12 +93,21 @@ public class AccountRestController {
 	// { "id" : 5 , "label" : "compte5QueJaime" , "balance" : 150.0 }
 		
 	@PutMapping({"" , "/{id}" }) 
+	/*
 	public AccountL0 putCompteToUpdate(@RequestBody AccountL0 accountDto , 
 		      @PathVariable(value="id",required = false ) String idToUpdate) {
 		if(accountDto.getId()==null)	
 			accountDto.setId(idToUpdate);
 		accountService.update(DtoConverter.INSTANCE.map(accountDto,Account.class)); //remonte NotFoundException si pas trouvé
 		return accountDto;
+	}
+	*/
+	public Account putAccountToUpdate(@RequestBody Account account , 
+		      @PathVariable(value="id",required = false ) String idToUpdate) {
+		if(account.getId()==null)	
+			account.setId(idToUpdate);
+		accountService.update(account); //remonte NotFoundException si pas trouvé
+		return account;
 	}
 
 }

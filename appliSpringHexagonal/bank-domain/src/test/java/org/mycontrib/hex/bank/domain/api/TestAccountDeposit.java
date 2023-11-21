@@ -12,8 +12,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mycontrib.hex.bank.domain.entity.Account;
 import org.mycontrib.hex.bank.domain.impl.AccountServiceImpl;
-import org.mycontrib.hex.bank.domain.spi.AccountLoading;
-import org.mycontrib.hex.bank.domain.spi.AccountSaving;
+import org.mycontrib.hex.bank.domain.spi.AccountLoader;
+import org.mycontrib.hex.bank.domain.spi.AccountSaver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,9 +29,9 @@ public class TestAccountDeposit {
 	
 	//SPI to Mock:
 	@Mock
-	private AccountLoading accountLoader;//to mock;
+	private AccountLoader accountLoader;//to mock;
 	@Mock
-	private AccountSaving accountSaver;//to mock;
+	private AccountSaver accountSaver;//to mock;
 	
 	@Test
 	public void testDeposit() {
@@ -56,7 +56,7 @@ public class TestAccountDeposit {
 		
 		//Verify that new balance saving was asked to accountSaver:
 		Mockito.verify(accountSaver)
-		       .saveOrUpdate(
+		       .updateExisting(
 				   Mockito.eq( new Account(id,"compte qui va bien",expectedNewBalance) ) /* rely on Account.equals())*/
 		        );
 	}

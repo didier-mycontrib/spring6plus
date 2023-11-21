@@ -1,6 +1,7 @@
 package org.mycontrib.hex.generic.util.converter;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -47,6 +48,14 @@ public class UltraBasicGenericMapper {
 	
 	public String longToString(Long l) {
 		return l!=null?String.valueOf(l):null;
+	}
+	
+	public UUID stringToUuid(String s){
+		return s!=null?UUID.fromString(s):null;
+	}
+	
+	public String uuidToString(UUID u) {
+		return u!=null?u.toString():null;
 	}
 
 }

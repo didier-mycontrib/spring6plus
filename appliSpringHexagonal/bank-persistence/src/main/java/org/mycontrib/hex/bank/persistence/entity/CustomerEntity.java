@@ -9,9 +9,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +20,10 @@ import lombok.Setter;
 @Entity
 @Getter @Setter @NoArgsConstructor
 @Table(name="customer")
+	
+@NamedNativeQuery(name = "CustomerEntity.allCustomers", 
+                    query = "select * from customer c", 
+                    resultClass = CustomerEntity.class)
 public class CustomerEntity {
 
 	@Id

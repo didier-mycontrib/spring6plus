@@ -37,7 +37,12 @@ public class CustomerLoaderAdapter implements CustomerLoader {
 
 	@Override
 	public List<Customer> loadAll() {
-		return EntityConverter.INSTANCE.customerEntityListToCustomerListWithoutDetails(customerRepository.findAll());
+		//return EntityConverter.INSTANCE.customerEntityListToCustomerListWithoutDetails(customerRepository.findAll());
+		
+		//via allCustomers() (via @NamedNativeQuery)
+		//return EntityConverter.INSTANCE.map(customerRepository.allCustomers(),Customer.class);
+		return EntityConverter.INSTANCE.customerEntityListToCustomerListWithoutDetails(customerRepository.allCustomers());
+		//With some native query JPA/Hibernate still loading some lazy related components !!!!
 	}
 
 	

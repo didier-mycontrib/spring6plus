@@ -1093,3 +1093,8 @@ drop table if exists account_ownersphip cascade ;
 drop table if exists contact_details cascade ;
 drop table if exists customer cascade ;
 drop table if exists operation cascade ;
+drop table if exists account cascade ;
+drop table if exists account_ownersphip cascade ;
+drop table if exists contact_details cascade ;
+drop table if exists customer cascade ;
+drop table if exists operation cascade ;

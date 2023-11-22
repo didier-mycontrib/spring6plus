@@ -1,0 +1,40 @@
+package org.mycontrib.hex.generic.core.impl;
+
+import java.io.Serializable;
+
+import org.mycontrib.hex.generic.core.api.ReactiveQuerying;
+import org.mycontrib.hex.generic.core.domain.entity.WithId;
+import org.mycontrib.hex.generic.core.exception.NotFoundDomainException;
+import org.mycontrib.hex.generic.core.spi.ReactiveLoader;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+public abstract class GenericReactiveQueringAbstract <T extends WithId<ID>,ID extends Serializable> implements ReactiveQuerying<T,ID> {
+	
+	protected ReactiveLoader<T,ID> genericLoader;
+	
+	public void setGenericLoader(ReactiveLoader<T,ID> genericLoader) {
+		this.genericLoader=genericLoader;
+	}
+	
+
+	public GenericReactiveQueringAbstract(ReactiveLoader<T, ID> genericLoader) {
+		this.genericLoader = genericLoader;
+	}
+
+	@Override
+	public Mono<T> getById(String id) {
+		return genericLoader.loadById(null)
+				.switchIfEmpty(Mono.error(new NotFoundDomainException("no entity found with id="+id)));
+	}
+
+
+	@Override
+	public Flux<T> queryAll() {
+		return genericLoader.loadAll();
+	}
+
+	
+
+}

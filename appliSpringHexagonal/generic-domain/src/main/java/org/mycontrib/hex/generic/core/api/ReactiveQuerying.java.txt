@@ -1,0 +1,10 @@
+package org.mycontrib.hex.generic.core.api;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+
+public interface ReactiveQuerying<T,ID> {
+	Mono<T> getById(String id) /*throws NotFoundDomainException*/;
+	Flux<T> queryAll() ;
+}

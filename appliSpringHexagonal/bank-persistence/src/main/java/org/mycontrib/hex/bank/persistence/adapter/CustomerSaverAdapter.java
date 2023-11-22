@@ -1,7 +1,7 @@
 package org.mycontrib.hex.bank.persistence.adapter;
 
-import org.mycontrib.hex.bank.domain.entity.Customer;
-import org.mycontrib.hex.bank.domain.spi.CustomerSaver;
+import org.mycontrib.hex.bank.core.domain.entity.Customer;
+import org.mycontrib.hex.bank.core.spi.CustomerSaver;
 import org.mycontrib.hex.bank.persistence.dao.CustomerJpaRepository;
 import org.mycontrib.hex.bank.persistence.entity.ContactDetailsEntity;
 import org.mycontrib.hex.bank.persistence.entity.CustomerEntity;

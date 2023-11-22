@@ -3,8 +3,8 @@ package org.mycontrib.hex.bank.persistence.adapter;
 import java.util.List;
 import java.util.Optional;
 
-import org.mycontrib.hex.bank.domain.entity.Account;
-import org.mycontrib.hex.bank.domain.spi.AccountLoader;
+import org.mycontrib.hex.bank.core.domain.entity.Account;
+import org.mycontrib.hex.bank.core.spi.AccountLoader;
 import org.mycontrib.hex.bank.persistence.dao.AccountJpaRepository;
 import org.mycontrib.hex.bank.persistence.dao.AccountOwnershipJpaRepository;
 import org.mycontrib.hex.bank.persistence.entity.AccountEntity;

@@ -3,9 +3,9 @@ package org.mycontrib.hex.bank.rest.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.mycontrib.hex.bank.domain.api.OperationService;
-import org.mycontrib.hex.bank.domain.entity.Operation;
-import org.mycontrib.hex.generic.domain.exception.NotFoundDomainException;
+import org.mycontrib.hex.bank.core.api.OperationService;
+import org.mycontrib.hex.bank.core.domain.entity.Operation;
+import org.mycontrib.hex.generic.core.exception.NotFoundDomainException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,12 +1,12 @@
 package org.mycontrib.hex.bank.init;
 
-import org.mycontrib.hex.bank.domain.api.OperationService;
-import org.mycontrib.hex.bank.domain.api.ag.AccountService;
-import org.mycontrib.hex.bank.domain.api.ag.CustomerService;
-import org.mycontrib.hex.bank.domain.entity.Account;
-import org.mycontrib.hex.bank.domain.entity.ContactDetails;
-import org.mycontrib.hex.bank.domain.entity.Customer;
-import org.mycontrib.hex.bank.domain.entity.Operation;
+import org.mycontrib.hex.bank.core.api.OperationService;
+import org.mycontrib.hex.bank.core.api.ag.AccountService;
+import org.mycontrib.hex.bank.core.api.ag.CustomerService;
+import org.mycontrib.hex.bank.core.domain.entity.Account;
+import org.mycontrib.hex.bank.core.domain.entity.ContactDetails;
+import org.mycontrib.hex.bank.core.domain.entity.Customer;
+import org.mycontrib.hex.bank.core.domain.entity.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;

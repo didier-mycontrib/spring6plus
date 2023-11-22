@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.mycontrib.hex.bank.domain.entity.Operation;
-import org.mycontrib.hex.bank.domain.spi.OperationLoader;
+import org.mycontrib.hex.bank.core.domain.entity.Operation;
+import org.mycontrib.hex.bank.core.spi.OperationLoader;
 import org.mycontrib.hex.bank.persistence.dao.OperationJpaRepository;
 import org.mycontrib.hex.bank.persistence.entity.OperationEntity;
 import org.springframework.beans.factory.annotation.Autowired;

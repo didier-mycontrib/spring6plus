@@ -1,0 +1,13 @@
+package org.mycontrib.hex.generic.core.api;
+
+import reactor.core.publisher.Mono;
+
+
+
+public interface ReactiveDomainLifeCycle<T,ID> {
+	
+	Mono<T> create(T e);//returning created entity with id
+	Mono<T> update(T e);//returning updated entity
+	Mono<T> deleteById(ID id);//returning deleted entity
+
+}

@@ -1,7 +1,7 @@
 package org.mycontrib.hex.bank.persistence.adapter;
 
-import org.mycontrib.hex.bank.domain.entity.Operation;
-import org.mycontrib.hex.bank.domain.spi.OperationSaver;
+import org.mycontrib.hex.bank.core.domain.entity.Operation;
+import org.mycontrib.hex.bank.core.spi.OperationSaver;
 import org.mycontrib.hex.bank.persistence.dao.OperationJpaRepository;
 import org.mycontrib.hex.bank.persistence.entity.OperationEntity;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,9 +3,9 @@ package org.mycontrib.hex.bank.persistence.adapter;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.mycontrib.hex.bank.domain.entity.Account;
-import org.mycontrib.hex.bank.domain.entity.AccountOwnership;
-import org.mycontrib.hex.bank.domain.spi.AccountSaver;
+import org.mycontrib.hex.bank.core.domain.entity.Account;
+import org.mycontrib.hex.bank.core.domain.entity.AccountOwnership;
+import org.mycontrib.hex.bank.core.spi.AccountSaver;
 import org.mycontrib.hex.bank.persistence.dao.AccountJpaRepository;
 import org.mycontrib.hex.bank.persistence.dao.AccountOwnershipJpaRepository;
 import org.mycontrib.hex.bank.persistence.dao.CustomerJpaRepository;

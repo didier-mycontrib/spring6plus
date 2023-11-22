@@ -2,10 +2,10 @@ package org.mycontrib.hex.bank.persistence.adapter;
 
 import java.util.List;
 
-import org.mycontrib.hex.bank.domain.entity.Account;
-import org.mycontrib.hex.bank.domain.entity.ContactDetails;
-import org.mycontrib.hex.bank.domain.entity.Customer;
-import org.mycontrib.hex.bank.domain.entity.Operation;
+import org.mycontrib.hex.bank.core.domain.entity.Account;
+import org.mycontrib.hex.bank.core.domain.entity.ContactDetails;
+import org.mycontrib.hex.bank.core.domain.entity.Customer;
+import org.mycontrib.hex.bank.core.domain.entity.Operation;
 import org.mycontrib.hex.bank.persistence.entity.AccountEntity;
 import org.mycontrib.hex.bank.persistence.entity.ContactDetailsEntity;
 import org.mycontrib.hex.bank.persistence.entity.CustomerEntity;

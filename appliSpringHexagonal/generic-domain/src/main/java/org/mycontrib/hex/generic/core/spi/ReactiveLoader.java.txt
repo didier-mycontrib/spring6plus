@@ -1,0 +1,10 @@
+package org.mycontrib.hex.generic.core.spi;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+
+public interface ReactiveLoader<T,ID> {
+	public Mono<T> loadById(ID id);
+	public Flux<T> loadAll();
+}

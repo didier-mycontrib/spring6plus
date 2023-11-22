@@ -3,8 +3,8 @@ package org.mycontrib.hex.bank.persistence.adapter;
 import java.util.List;
 import java.util.Optional;
 
-import org.mycontrib.hex.bank.domain.entity.Customer;
-import org.mycontrib.hex.bank.domain.spi.CustomerLoader;
+import org.mycontrib.hex.bank.core.domain.entity.Customer;
+import org.mycontrib.hex.bank.core.spi.CustomerLoader;
 import org.mycontrib.hex.bank.persistence.dao.CustomerJpaRepository;
 import org.mycontrib.hex.bank.persistence.entity.CustomerEntity;
 import org.springframework.beans.factory.annotation.Autowired;

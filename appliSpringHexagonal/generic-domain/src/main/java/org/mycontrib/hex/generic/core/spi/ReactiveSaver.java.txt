@@ -1,0 +1,10 @@
+package org.mycontrib.hex.generic.core.spi;
+
+import reactor.core.publisher.Mono;
+
+
+public interface ReactiveSaver<T,ID> {
+	 public Mono<T> saveNew(T entity);
+	 public Mono<T>  updateExisting(T entity);
+	 public Mono<T> deleteFromId(ID id);//returning deleted
+}

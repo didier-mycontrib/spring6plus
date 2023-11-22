@@ -1,6 +1,6 @@
 package org.mycontrib.hex.bank.rest.controller;
 
-import org.mycontrib.hex.bank.domain.api.ag.AccountService;
+import org.mycontrib.hex.bank.core.api.ag.AccountService;
 import org.mycontrib.hex.bank.rest.dto.TransferRequest;
 import org.mycontrib.hex.bank.rest.dto.TransferResponse;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,9 +2,9 @@ package org.mycontrib.hex.bank.rest.controller;
 
 import java.util.List;
 
-import org.mycontrib.hex.bank.domain.api.ag.AccountService;
-import org.mycontrib.hex.bank.domain.entity.Account;
-import org.mycontrib.hex.generic.domain.exception.NotFoundDomainException;
+import org.mycontrib.hex.bank.core.api.ag.AccountService;
+import org.mycontrib.hex.bank.core.domain.entity.Account;
+import org.mycontrib.hex.generic.core.exception.NotFoundDomainException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

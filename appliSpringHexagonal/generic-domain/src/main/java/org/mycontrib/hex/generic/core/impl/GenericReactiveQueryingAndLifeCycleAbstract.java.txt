@@ -1,0 +1,49 @@
+package org.mycontrib.hex.generic.core.impl;
+
+import java.io.Serializable;
+
+import org.mycontrib.hex.generic.core.api.ReactiveDomainLifeCycle;
+import org.mycontrib.hex.generic.core.domain.entity.WithId;
+import org.mycontrib.hex.generic.core.exception.NotFoundDomainException;
+import org.mycontrib.hex.generic.core.spi.ReactiveLoader;
+import org.mycontrib.hex.generic.core.spi.ReactiveSaver;
+
+import reactor.core.publisher.Mono;
+
+public abstract class GenericReactiveQueryingAndLifeCycleAbstract<T extends WithId<ID>,ID extends Serializable>
+                      extends GenericReactiveQueringAbstract<T, ID> implements ReactiveDomainLifeCycle<T,ID>{
+    private ReactiveSaver<T,ID> genericSaver;
+	
+	public void setGenericSaver(ReactiveSaver<T,ID> genericSaver) {
+		this.genericSaver=genericSaver;
+	}
+	
+
+	public GenericReactiveQueryingAndLifeCycleAbstract(ReactiveLoader<T, ID> genericLoader, ReactiveSaver<T, ID> genericSaver) {
+		super(genericLoader);
+		this.genericSaver = genericSaver;
+	}
+
+
+	@Override
+	public Mono<T> create(T e) {
+		return genericSaver.saveNew(e);
+	}
+
+
+	@Override
+	public Mono<T> update(T e) {
+		return genericSaver.updateExisting(e)
+				.switchIfEmpty(Mono.error(new NotFoundDomainException("can not update , no entity found with id="+e.extractId()))); 
+	}
+
+
+	@Override
+	public Mono<T> deleteById(ID id) {
+		return genericSaver.deleteFromId(id)
+				.switchIfEmpty(Mono.error(new NotFoundDomainException("can not delete , no entity found with id="+id)));
+	}
+
+
+	
+}

@@ -20,5 +20,7 @@
   	<module>bank-rest</module>
   	<module>generic-util</module>
   	<module>generic-domain</module>
+  	<module>kafka-client-app</module>
+  	<module>bank-messaging</module>
   </modules>
 </project>

@@ -3,9 +3,11 @@ package org.mycontrib.hex.bank.init;
 import org.mycontrib.hex.bank.core.api.OperationService;
 import org.mycontrib.hex.bank.core.api.ag.AccountService;
 import org.mycontrib.hex.bank.core.api.ag.CustomerService;
+import org.mycontrib.hex.bank.core.api.ag.DeviseService;
 import org.mycontrib.hex.bank.core.domain.entity.Account;
 import org.mycontrib.hex.bank.core.domain.entity.ContactDetails;
 import org.mycontrib.hex.bank.core.domain.entity.Customer;
+import org.mycontrib.hex.bank.core.domain.entity.Devise;
 import org.mycontrib.hex.bank.core.domain.entity.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -34,6 +36,9 @@ public class InitDataSet {
 	
 	@Autowired
 	private OperationService operationService;
+	
+	@Autowired
+	private DeviseService deviseService;
 	
 	
 	@PostConstruct
@@ -77,8 +82,12 @@ public class InitDataSet {
 			compteDd.addCustomerOwnership(c1.getId());
 			compteDd = accountService.create(compteDd);
 		
-		
-	
+		Devise deviseEur = new Devise("EUR","euro",1.0);
+	    deviseService.create(deviseEur);
+	    Devise deviseUsd = new Devise("USD","dollar",1.05);
+	    deviseService.create(deviseUsd);
+	    Devise deviseGbp = new Devise("GBP","livre",0.9);
+	    deviseService.create(deviseGbp);
     	
 	}
 

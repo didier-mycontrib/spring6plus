@@ -3,30 +3,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>accountAjax</title>
+<title>deviseAjax</title>
 <script src="js/my_ajax_util.js"></script>
 <script src="js/my_crud_util.js"></script>
-<script src="js/accountAjax.js"></script>
+<script src="js/deviseAjax.js"></script>
 </head>
 <body>
-	id: <input id="inputId" /> <br/>
-	label: <input id="inputLabel" /> <br/>
-	initial balance: <input id="inputInitialBalance" /> <br/>
+	<!-- nb id="inputId" for my_crud_util.js -->
+	code: <input id="inputId" /> (ex: USD , EUR) <br/>
+	name: <input id="inputName" /> (ex: Dollar , Euro) <br/>
+	rate: <input id="inputRate" /> <br/>
+
 	<button id="btnReset">reset</button> &nbsp;
 	<button id="btnAdd">add</button> &nbsp;
 	<button id="btnUpdate">update</button>&nbsp;
 	<button id="btnDelete">delete</button>
+	
 	<hr/>
     <span id="spanMsg"></span>
     <hr/>
-	<button id="btnRefreshAll">search accounts</button>
-	criteria:<input id="inputCriteria" value="minBalance=-999" /> <br/>
+	<button id="btnRefreshAll">refresh all news</button>
     <table border="1">
 	   <thead>
-		<tr><th>id</th><th>label</th><th>balance</th></tr>
+		<tr><th>code</th><th>name</th><th>rate</th></tr>
 	   </thead>
 	   <tbody id="table_body">
-		   <!-- <tr><td>1</td><td>compteA</td><td>50.0</td></tr> -->
+		   <!-- <tr><td>EUR</td><td>Euro</td><td>1.0</td></tr> -->
 	   </tbody>
 	</table>
 	<hr/>

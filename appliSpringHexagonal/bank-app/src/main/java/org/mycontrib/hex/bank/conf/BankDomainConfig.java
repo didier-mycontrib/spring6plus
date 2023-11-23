@@ -3,13 +3,17 @@ package org.mycontrib.hex.bank.conf;
 import org.mycontrib.hex.bank.core.api.OperationService;
 import org.mycontrib.hex.bank.core.api.ag.AccountService;
 import org.mycontrib.hex.bank.core.api.ag.CustomerService;
+import org.mycontrib.hex.bank.core.api.ag.DeviseService;
 import org.mycontrib.hex.bank.core.impl.AccountServiceImpl;
 import org.mycontrib.hex.bank.core.impl.CustomerServiceImpl;
+import org.mycontrib.hex.bank.core.impl.DeviseServiceImpl;
 import org.mycontrib.hex.bank.core.impl.OperationServiceImpl;
 import org.mycontrib.hex.bank.core.spi.AccountLoader;
 import org.mycontrib.hex.bank.core.spi.AccountSaver;
 import org.mycontrib.hex.bank.core.spi.CustomerLoader;
 import org.mycontrib.hex.bank.core.spi.CustomerSaver;
+import org.mycontrib.hex.bank.core.spi.DeviseLoader;
+import org.mycontrib.hex.bank.core.spi.DeviseSaver;
 import org.mycontrib.hex.bank.core.spi.OperationLoader;
 import org.mycontrib.hex.bank.core.spi.OperationSaver;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +37,11 @@ public class BankDomainConfig {
 			                                 OperationLoader operationLoader , 
 			                                 OperationSaver operationSaver) {
 		return new OperationServiceImpl(accountLoader,operationLoader,operationSaver );
+	}
+	
+	@Bean
+	public DeviseService deviseService(DeviseLoader deviseLoader , DeviseSaver deviseSaver) {
+		return new DeviseServiceImpl(deviseLoader,deviseSaver);
 	}
 
 }

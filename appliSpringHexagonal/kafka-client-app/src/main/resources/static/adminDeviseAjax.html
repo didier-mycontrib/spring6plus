@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>adminDeviseAjax</title>
+<script src="js/my_ajax_util.js"></script>
+<script src="js/adminDeviseAjax.js"></script>
+</head>
+<body>
+	<!-- nb id="inputId" for my_crud_util.js -->
+	code: <input id="inputId" /> (ex: USD , EUR) <br/>
+	name: <input id="inputName" /> (ex: Dollar , Euro) <br/>
+	rate: <input id="inputRate" /> <br/>
+
+	<button id="btnReset">reset</button> &nbsp;
+	<button id="btnAdd">post message into kafka "devises" topic</button> &nbsp;
+
+	<hr/>
+    <span id="spanMsg"></span>
+    <hr/>
+    
+	<a href="index.html">retour vers index.html</a> <br/>
+</body>
+</html>

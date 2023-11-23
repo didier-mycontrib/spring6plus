@@ -4,6 +4,7 @@ import java.util.concurrent.CompletableFuture;
 
 import org.mycontrib.hex.bank.core.domain.entity.Devise;
 import org.mycontrib.hex.generic.util.json.JsonUtil;
+import org.mycontrib.hex.generic.util.notification.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -22,7 +23,7 @@ public class DevisesSenderWithKafka implements DevisesSender {
 	
 	//@PostConstruct
 	public void autoStart(){
-		//sendDeviseMessage(new Devise("USD","Dollar",1.012345));
+		//sendDeviseMessage(new Notification<Devise>(new Devise("USD","Dollar",1.012345),"updated","bank"));
 	}
 
 	public void sendMessage(String message) {
@@ -39,8 +40,8 @@ public class DevisesSenderWithKafka implements DevisesSender {
 	     });
 	}
 	
-	public void sendDeviseMessage(Devise devise) {
-		sendMessage(JsonUtil.stringify(devise));
+	public void sendDeviseMessage(Devise devise,String eventType) {
+		sendMessage(JsonUtil.stringify(new Notification<Devise>(devise,eventType,"bank")));
 	}
 
 }

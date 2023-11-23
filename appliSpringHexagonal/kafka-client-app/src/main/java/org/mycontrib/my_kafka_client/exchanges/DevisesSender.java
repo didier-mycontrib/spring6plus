@@ -1,9 +1,9 @@
 package org.mycontrib.my_kafka_client.exchanges;
 
-import java.time.LocalDateTime;
 import java.util.concurrent.CompletableFuture;
 
 import org.mycontrib.hex.generic.util.json.JsonUtil;
+import org.mycontrib.hex.generic.util.notification.Notification;
 import org.mycontrib.my_kafka_client.data.Devise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -40,7 +40,7 @@ public class DevisesSender {
 	}
 	
 	public void sendDeviseMessage(Devise devise) {
-		sendMessage(JsonUtil.stringify(devise));
+		sendMessage(JsonUtil.stringify(new Notification<Devise>(devise,Notification.UPDATED,"mygroup")));
 	}
 
 }

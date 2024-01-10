@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>appliSpringBoot</title>
+</head>
+<body>
+   <h1>appliSpringBoot</h1>
+   <a href="site/app/hello-world-1">hello-world-1 (via Spring Mvc)</a> <br/>
+   <a href="site/app/hello-world-2">hello-world-2 (via Spring Mvc et thymeleaf)</a> <br/>
+   <a href="site/app/to-welcome">welcome bank_part (thymeleaf with layout, spring-mvc)</a><br/>
+   <a href="site/login">login as admin(to get a HttpSession.id in cookie JSESSIONID)</a> <br/>
+   <a href="site/admin/hello-admin">hello-admin (for ADMIN only)</a> <br/>
+   <a href="site/other/hello-other">hello-other (default security)</a> <br/>
+   <a href="site/logout">logout (session end)</a> <br/>
+   <hr/>
+   <a href="doc-swagger.html" target="_blank">doc-swagger</a> <br/>
+   <a href="h2-console" target="_blank">console h2 (mydbbank)</a> <br/>
+   <hr/>
+   <a href="comptes.html">appel js/ajax d'un WS REST sur comptes</a><br/>
+   <a href="clients.html">appel js/ajax d'un WS REST sur clients (avec login REST)</a><br/>
+   <hr/>
+   <a href="./rest/bank-api/client/1">client 1 au format JSON (REST)</a><br/>
+   <a href="./rest/bank-api/client">tous les clients en JSON (REST)</a><br/>
+   <a href="./rest/bank-api/client?nom=Therieur">tous les clients avec nom=Therieur en JSON (REST)</a><br/>
+   <hr/>
+   <a href="./rest/bank-api/compte/1">compteDto 1 au format JSON (REST)</a><br/>
+   <a href="./rest/bank-api/compte/withDetails/1">compteDto 1 avec details au format JSON (REST)</a><br/>
+   <a href="./rest/bank-api/compte">tous les compteDto en JSON (REST)</a><br/>
+   <a href="./rest/bank-api/compte?numClient=1">tous les compteDto du client 1 en JSON (REST)</a><br/>
+   <a href="./rest/bank-api/compte?soldeMini=200">tous les compteDto avec solde>=200 en JSON (REST)</a><br/> 
+   <a href="./rest/bank-api/compte?numClient=1&soldeMini=100">compteDto du client 1 avec solde>=100 en JSON (REST)</a><br/> 
+</body>
+</html>

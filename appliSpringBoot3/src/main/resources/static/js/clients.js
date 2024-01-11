@@ -43,7 +43,13 @@ function doAjout(){
 
     var errCallback = function(data){
 	   console.log("erreur=" + data);
-       var message = (JSON.parse(data)).message;
+       var message = "error";
+       try{
+		   message=(JSON.parse(data)).message;
+		   }
+	   catch(err){
+		   message=data;
+	   }
        document.getElementById("spanMessage").innerHTML="<b>"+message+"</b>";
     }
 

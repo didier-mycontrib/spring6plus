@@ -26,14 +26,19 @@ public class MyStandaloneFilterSimpleConfigurer implements MyFilterChainSimpleCo
 	@Override
 	public HttpSecurity configureEndOfSecurityChain(HttpSecurity http)
 			throws Exception {
-		return http
+		/*
+		return http				
 		// If the user is not authenticated, returns 401
 		.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 		// This is a stateless application, disable sessions
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 		// Custom filter for authenticating users using tokens
 		.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+		*/
 		
+		return http.exceptionHandling(eh -> eh.authenticationEntryPoint(unauthorizedHandler))
+				   .sessionManagement(sM->sM.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				   .addFilterBefore(jwtAuthenticationFilter,  UsernamePasswordAuthenticationFilter.class);
 	}
 
 }

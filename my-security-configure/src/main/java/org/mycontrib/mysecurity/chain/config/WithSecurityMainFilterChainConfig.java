@@ -24,8 +24,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @Profile("withSecurity")
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true) for Spring5
-@EnableMethodSecurity //with default prePostEnabled = true
+//@EnableGlobalMethodSecurity(prePostEnabled = true) //for Spring5
+@EnableMethodSecurity() //with default prePostEnabled = true
 //necessary for @PreAuthorize("hasRole('ADMIN or ...')")
 @ConfigurationPropertiesScan("org.mycontrib.mysecurity.chain.properties")
 public class WithSecurityMainFilterChainConfig {

@@ -65,6 +65,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 logger.info("JwtAuthenticationFilter is storing authentication:"+authentication + " in spring security SecurityContextHolder");
             }
+            else {
+            	logger.info("no or invalid jwtToken");
+            	SecurityContextHolder.getContext().setAuthentication(null);
+            }
         } catch (Exception ex) {
             logger.error("Could not set user authentication in security context", ex);
         }
@@ -77,10 +81,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String getJwtFromRequest(HttpServletRequest request) {
+    	String jwtToken = null;
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7, bearerToken.length());
+        	jwtToken =  bearerToken.substring(7, bearerToken.length());
         }
-        return null;
+        if(jwtToken != null && jwtToken.equals("null")) jwtToken=null;
+        return jwtToken;
     }
 }

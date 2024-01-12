@@ -1,5 +1,7 @@
 package org.mycontrib.mysecurity.standalone.autoconfigure;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 /*
@@ -16,8 +18,11 @@ https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-featu
 	             "org.mycontrib.mysecurity.jwt.util" ,
 	             "org.mycontrib.mysecurity.standalone.rest",
 	             "org.mycontrib.mysecurity.common"})
-public class MySecurityAutoConfiguration {
-	public MySecurityAutoConfiguration() {
-	     System.out.println("org.mycontrib.mysecurity.standalone.autoconfigure.MySecurityAutoConfiguration loaded (my-security-std-jwt-configure)");
+public class MySecurityStdJwtAutoConfiguration {
+	
+	private static Logger logger = LoggerFactory.getLogger(MySecurityStdJwtAutoConfiguration.class);
+	
+	public MySecurityStdJwtAutoConfiguration() {
+	     logger.debug("org.mycontrib.mysecurity.standalone.autoconfigure.MySecurityStdJwtAutoConfiguration loaded (my-security-std-jwt-configure)");
 	}
 }

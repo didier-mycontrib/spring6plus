@@ -65,7 +65,7 @@ public class DefaultWithSecurityMainFilterChainSubConfig implements WithSecurity
 	public HttpSecurity prepareRestApiFilterChain(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests(
-				auth -> addPermissionsFromAreaConfig(
+				auth ->  addPermissionsFromAreaConfig(
 		    		      auth.requestMatchers(HttpMethod.POST, MySecurityExtension.DEFAULT_REST_STANDALONE_LOGIN_PATH).permitAll() 
 		    		      , areasConfig.getRest())	
 		    		   .requestMatchers( "/rest/**").authenticated()//by default

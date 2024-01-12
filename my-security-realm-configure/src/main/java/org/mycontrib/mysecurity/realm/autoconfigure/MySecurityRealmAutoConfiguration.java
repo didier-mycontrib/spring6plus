@@ -1,5 +1,7 @@
 package org.mycontrib.mysecurity.realm.autoconfigure;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 /*
@@ -15,10 +17,13 @@ https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-featu
 	              "org.mycontrib.mysecurity.realm.config.userdetails",
 	              "org.mycontrib.mysecurity.realm.properties",
 	              "org.mycontrib.mysecurity.common"})
-public class MySecurityAutoConfiguration {
+public class MySecurityRealmAutoConfiguration {
 	
-	public MySecurityAutoConfiguration() {
-	     System.out.println("org.mycontrib.mysecurity.realm.autoconfigure.MySecurityAutoConfiguration loaded (my-security-realm-configure)");
+	private static Logger logger = LoggerFactory.getLogger(MySecurityRealmAutoConfiguration.class);
+	
+	public MySecurityRealmAutoConfiguration() {
+		
+	     logger.debug("org.mycontrib.mysecurity.realm.autoconfigure.MySecurityRealmAutoConfiguration loaded (my-security-realm-configure)");
 	}
 
 }

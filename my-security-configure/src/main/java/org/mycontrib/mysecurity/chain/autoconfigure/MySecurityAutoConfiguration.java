@@ -1,5 +1,7 @@
 package org.mycontrib.mysecurity.chain.autoconfigure;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 /*
@@ -15,7 +17,9 @@ https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-featu
 	             "org.mycontrib.mysecurity.area.config"})
 public class MySecurityAutoConfiguration {
 	
+	private static Logger logger = LoggerFactory.getLogger(MySecurityAutoConfiguration.class);
+	
 	public MySecurityAutoConfiguration() {
-	     System.out.println("org.mycontrib.mysecurity.chain.autoconfigure.MySecurityAutoConfiguration loaded (my-security-configure)");
+	     logger.debug("org.mycontrib.mysecurity.chain.autoconfigure.MySecurityAutoConfiguration loaded (my-security-configure)");
 	}
 }

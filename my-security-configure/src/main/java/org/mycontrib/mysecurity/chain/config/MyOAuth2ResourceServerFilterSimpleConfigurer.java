@@ -21,8 +21,7 @@ public class MyOAuth2ResourceServerFilterSimpleConfigurer implements MyFilterCha
 	@Override
 	public HttpSecurity configureEndOfSecurityChain(HttpSecurity http)throws Exception{
 	return http.
-			sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and()
+			sessionManagement(sM -> sM.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
 	}
 

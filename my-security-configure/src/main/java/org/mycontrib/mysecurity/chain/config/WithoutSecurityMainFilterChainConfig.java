@@ -27,8 +27,8 @@ public class WithoutSecurityMainFilterChainConfig {
 				 auth -> auth.requestMatchers( "/**").permitAll()				    
 				 )
 		    .cors( Customizer.withDefaults()) //enable CORS (avec @CrossOrigin sur class @RestController)
-		    .headers((headers) -> headers.frameOptions( frameOptions-> frameOptions.sameOrigin()) )
-		    .csrf(((csrf) -> csrf.disable())); 
+		    .headers(headers -> headers.frameOptions( frameOptions-> frameOptions.sameOrigin()) )
+		    .csrf(csrf -> csrf.disable()); 
 		
 		return http.build();
 	} 

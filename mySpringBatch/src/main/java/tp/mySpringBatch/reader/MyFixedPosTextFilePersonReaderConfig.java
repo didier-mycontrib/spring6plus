@@ -5,8 +5,9 @@ import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.batch.item.file.transform.FixedLengthTokenizer;
 import org.springframework.batch.item.file.transform.LineTokenizer;
+import org.springframework.batch.item.file.transform.Range;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,47 +17,41 @@ import org.springframework.core.io.Resource;
 import tp.mySpringBatch.model.Person;
 
 @Configuration
-public class MyCsvFilePersonReaderConfig {
+public class MyFixedPosTextFilePersonReaderConfig {
 	
-	@Value("file:data/input/csv/inputData.csv") //to read in project root directory
+	@Value("file:data/input/txt/fixedPositionInputData.txt") //to read in project root directory
 	  //NB: by default @Value(path) is @Value("classpath:path) //to read in src/main/resource or other classpath part
-	  private Resource inputCsvResource;
-
+	  private Resource inputTxtResource;
 	
 	//V2 with FlatFileItemReaderBuilder
-	  @Bean @Qualifier("csv")
-	  public FlatFileItemReader<Person> personCsvFileReader() {
+	  @Bean @Qualifier("fixedPosTxt")
+	   public FlatFileItemReader<Person> personFixedPosTxtFileReader() {
 		  
 		return new FlatFileItemReaderBuilder<Person>()
-				.name("personCsvFileReader")
-				.resource(inputCsvResource)
-				.linesToSkip(1)
-				.delimited()
-				.delimiter(";")
-				.names("firstName", "lastName", "age", "active")
+				.name("personFixedPosTxtFileReader")
+				.resource(inputTxtResource)
 				.targetType(Person.class)
+				.fixedLength()
+				.columns(new Range(1, 24), new Range(25, 48), new Range(49, 52), new Range(53, 58))
+				.names("firstName", "lastName", "age", "active")
 				.build();
 	  }
-   
 
-	/*
+	 /*
 	  //OLD V1 with sub-methods and without builder :
-	  
-	    @Bean @Qualifier("csv")
-	   public FlatFileItemReader<Person> personCsvFileReader() {
-	    var personCsvFileItemReader = new FlatFileItemReader<Person>();
+	    @Bean @Qualifier("fixedPosTxt")
+	   public FlatFileItemReader<Person> personFixedPosTxtFileReader() {
+	    var personFixPosTxtFileItemReader = new FlatFileItemReader<Person>();
 	    
 	    
-	    personCsvFileItemReader.setLineMapper(
-	    		this.personLineMapper(this.personLineTokenizer(),
+	    personFixPosTxtFileItemReader.setLineMapper(
+	    		this.personLineMapper(this.personLineFixedLengthTokenizer(),
 	    				              this.personFieldSetMapper()));
 	    
-	    //Resource inputCsvResource = new FileSystemResource("data/input/csv/inputData.csv");
-	    personCsvFileItemReader.setResource(inputCsvResource);
+	    personFixPosTxtFileItemReader.setResource(inputTxtResource);
 	    
-	    personCsvFileItemReader.setLinesToSkip(1);
 	    
-	    return personCsvFileItemReader;
+	    return personFixPosTxtFileItemReader;
 	  }
 
 	   
@@ -73,19 +68,18 @@ public class MyCsvFilePersonReaderConfig {
 	    fieldSetMapper.setTargetType(Person.class);
 	    return fieldSetMapper;
 	  }
+	  
+	  public FixedLengthTokenizer personLineFixedLengthTokenizer() {
+	    var tokenizer = new FixedLengthTokenizer();
 
-	  public DelimitedLineTokenizer personLineTokenizer() {
-	    var tokenizer = new DelimitedLineTokenizer();
-	    tokenizer.setDelimiter(";");
-	    tokenizer.setNames("firstName", "lastName", "age", "active");
-	    return tokenizer;
+		tokenizer.setNames("firstName", "lastName", "age", "active");
+		tokenizer.setColumns(new Range(1, 24),
+							new Range(25, 48),
+							new Range(49, 52),
+							new Range(53, 58));
+		return tokenizer;
 	  }
-      */
+*/
+	  
+   
 }
-
-/*
- NB: https://docs.spring.io/spring-batch/reference/readers-and-writers/flat-files/file-item-reader.html
- possibilité de format mixte/hybride : PatternMatchingCompositeLineMapper lineMapper =
-		new PatternMatchingCompositeLineMapper();
-		...
- */

@@ -39,6 +39,11 @@
             <artifactId>jaxb-runtime</artifactId>
         </dependency>
 		
+		
+		<dependency>
+   			 <groupId>com.fasterxml.jackson.core</groupId>
+  			 <artifactId>jackson-databind</artifactId>
+		</dependency>
 	    	
 
        <!-- h2 in memory (or ...) database is required for JobRepository persistance -->

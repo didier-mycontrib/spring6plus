@@ -35,9 +35,11 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	//Job job = (Job) applicationContext.getBean("myHelloWorldJob");
     //Job job = (Job) applicationContext.getBean("copyFromCsvToCsvJob");
     //Job job = (Job) applicationContext.getBean("fromCsvToXmlJob");
+	// Job job = (Job) applicationContext.getBean("fromCsvToJsonJob");
 	// Job job = (Job) applicationContext.getBean("fromXmlToCsvJob");
+	  Job job = (Job) applicationContext.getBean("fromJsonToXmlJob");
     //Job job = (Job) applicationContext.getBean("insertIntoDbFromCsvJob");
-	Job job = (Job) applicationContext.getBean("insertIntoCsvFromDbJob");
+	//Job job = (Job) applicationContext.getBean("insertIntoCsvFromDbJob");
 	//Job job = (Job) applicationContext.getBean("withMyTaskletJob");
 
     JobParameters jobParameters = new JobParametersBuilder()

@@ -7,7 +7,6 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.batch.BatchDataSource;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -57,11 +56,11 @@ public class JobRepositoryBatchConfig {
     return new DataSourceTransactionManager(batchDataSource);
   }
   
-  @Bean @Qualifier("batch")
+  //@Bean @Qualifier("batch")
   public DataSourceInitializer databasePopulator(
 		  @Qualifier("batch") DataSource  batchDataSource) {
     ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-    populator.addScript(new ClassPathResource("org/springframework/batch/core/schema-drop-h2.sql"));
+    //populator.addScript(new ClassPathResource("org/springframework/batch/core/schema-drop-h2.sql"));
     populator.addScript(new ClassPathResource("org/springframework/batch/core/schema-h2.sql"));
     populator.setContinueOnError(false);
     populator.setIgnoreFailedDrops(false);

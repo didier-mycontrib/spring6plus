@@ -11,7 +11,7 @@ import org.springframework.core.io.WritableResource;
 import tp.mySpringBatch.model.Person;
 
 @Configuration
-public class MyCsvFilePersonWriter {
+public class MyCsvFilePersonWriterConfig {
 
 	  
 	 

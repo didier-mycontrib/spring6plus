@@ -3,6 +3,7 @@ package tp.mySpringBatch.reader;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,14 +12,14 @@ import org.springframework.core.io.Resource;
 import tp.mySpringBatch.model.Person;
 
 @Configuration
-public class MyCsvFilePersonReader {
+public class MyCsvFilePersonReaderConfig {
 	
 	@Value("file:data/input/csv/inputData.csv") //to read in project root directory
 	  //NB: by default @Value(path) is @Value("classpath:path) //to read in src/main/resource or other classpath part
 	  private Resource inputCsvResource;
 
 	//V2 with FlatFileItemReaderBuilder
-	  @Bean
+	  @Bean @Qualifier("csv")
 	  public FlatFileItemReader<Person> personCsvFileReader() {
 		  
 		return new FlatFileItemReaderBuilder<Person>()
@@ -38,7 +39,7 @@ public class MyCsvFilePersonReader {
 	  /*
 	  //OLD V1 with sub-methods and without builder :
 	  
-	    @Bean
+	    @Bean @Qualifier("csv")
 	   public FlatFileItemReader<Person> personCsvFileReader() {
 	    var personCsvFileItemReader = new FlatFileItemReader<Person>();
 	    

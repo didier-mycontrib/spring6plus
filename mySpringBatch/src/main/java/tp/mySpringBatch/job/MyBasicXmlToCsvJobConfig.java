@@ -35,37 +35,27 @@ import tp.mySpringBatch.model.Person;
 import tp.mySpringBatch.processor.SimpleUppercasePersonProcessor;
 
 @Configuration
-public class MyBasicCsvToXmlJob {
+public class MyBasicXmlToCsvJobConfig extends MyAbstractJobConfig{
 
-  public static final Logger logger = LoggerFactory.getLogger(MyBasicCsvToXmlJob.class);
+  public static final Logger logger = LoggerFactory.getLogger(MyBasicXmlToCsvJobConfig.class);
 
-
-  private final JobRepository jobRepository;
-
-  public MyBasicCsvToXmlJob(JobRepository jobRepository) {
-	//injection by constructor
-    this.jobRepository = jobRepository;
-  }
-  
- 
 
   @Bean
-  public Job fromCsvToXmlJob(@Qualifier("csvToXml") Step step1) {
-    var name = "Persons CsvToXml Job";
+  public Job fromXmlToCsvJob(@Qualifier("xmlToCsv") Step step1) {
+    var name = "Persons XmlToCsv Job";
     var jobBuilder = new JobBuilder(name, jobRepository);
     return jobBuilder.start(step1)
     		.listener(new JobCompletionNotificationListener())
     		.build();
   }
 
-  @Bean @Qualifier("csvToXml")
-  public Step stepCsvToXml(ItemReader<Person> personItemReader,
-		            @Qualifier("xml") ItemWriter<Person> personItemWriter ,
-		            @Qualifier("batch") PlatformTransactionManager txManager ) {
-    var name = "COPY CSV RECORDS To another CSV Step";
+  @Bean @Qualifier("xmlToCsv")
+  public Step stepXmlToCsv(@Qualifier("xml") ItemReader<Person> personItemReader,
+		                   @Qualifier("csv") ItemWriter<Person> personItemWriter ) {
+    var name = "COPY xml RECORDS To  CSV Step";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
-        .<Person, Person>chunk(5, txManager)
+        .<Person, Person>chunk(5, batchTxManager)
         .reader(personItemReader)
         .processor(SimpleUppercasePersonProcessor.INSTANCE)
         .writer(personItemWriter)

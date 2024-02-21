@@ -32,9 +32,13 @@ public class MySpringBatchApplication implements CommandLineRunner {
   @Override //from CommandLineRunner interface (run automatically)
   public void run(String... args) throws Exception {
 
+	//Job job = (Job) applicationContext.getBean("myHelloWorldJob");
     //Job job = (Job) applicationContext.getBean("copyFromCsvToCsvJob");
     //Job job = (Job) applicationContext.getBean("fromCsvToXmlJob");
-    Job job = (Job) applicationContext.getBean("insertIntoDbFromCsvJob");
+	// Job job = (Job) applicationContext.getBean("fromXmlToCsvJob");
+    //Job job = (Job) applicationContext.getBean("insertIntoDbFromCsvJob");
+	Job job = (Job) applicationContext.getBean("insertIntoCsvFromDbJob");
+	//Job job = (Job) applicationContext.getBean("withMyTaskletJob");
 
     JobParameters jobParameters = new JobParametersBuilder()
         .addString("JobID", String.valueOf(System.currentTimeMillis()))

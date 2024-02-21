@@ -4,6 +4,7 @@ set MVN_REPOSITORY=C:\Users\d2fde\.m2\repository
 REM set MVN_REPOSITORY=C:\Users\formation\.m2\repository
 
 set MY_H2_DB_URL_OUTPUT=jdbc:h2:~/outputDb
+set MY_H2_DB_URL_INPUT=jdbc:h2:~/inputDb
 set MY_H2_DB_URL_JOBREPOSITORY=jdbc:h2:~/jobRepositoryDb
 
 set PATH="C:\Prog\java\eclipse-jee-2023-12\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.9.v20231028-0858\jre\bin"

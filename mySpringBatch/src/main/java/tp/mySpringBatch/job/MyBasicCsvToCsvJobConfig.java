@@ -35,37 +35,22 @@ import tp.mySpringBatch.model.Person;
 import tp.mySpringBatch.processor.SimpleUppercasePersonProcessor;
 
 @Configuration
-public class MyBasicCsvToCsvJob {
+public class MyBasicCsvToCsvJobConfig extends MyAbstractJobConfig{
 
-  public static final Logger logger = LoggerFactory.getLogger(MyBasicCsvToCsvJob.class);
-
-
-  private final JobRepository jobRepository;
-
-  public MyBasicCsvToCsvJob(JobRepository jobRepository) {
-	//injection by constructor
-    this.jobRepository = jobRepository;
-  }
+  public static final Logger logger = LoggerFactory.getLogger(MyBasicCsvToCsvJobConfig.class);
   
- 
-
   @Bean
   public Job copyFromCsvToCsvJob(@Qualifier("csvToCsv") Step step1) {
-    var name = "Persons Copy Job";
-    var jobBuilder = new JobBuilder(name, jobRepository);
-    return jobBuilder.start(step1)
-    		.listener(new JobCompletionNotificationListener())
-    		.build();
+    return this.buildMySingleStepJob("copyFromCsvToCsvJob", step1);
   }
 
   @Bean @Qualifier("csvToCsv")
-  public Step stepCsvToCsv(ItemReader<Person> personItemReader,
-		            @Qualifier("csv") ItemWriter<Person> personItemWriter ,
-		            @Qualifier("batch") PlatformTransactionManager txManager ) {
+  public Step stepCsvToCsv(@Qualifier("csv") ItemReader<Person> personItemReader,
+		            @Qualifier("csv") ItemWriter<Person> personItemWriter  ) {
     var name = "COPY CSV RECORDS To another CSV Step";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
-        .<Person, Person>chunk(5, txManager)
+        .<Person, Person>chunk(5, batchTxManager)
         .reader(personItemReader)
         .processor(SimpleUppercasePersonProcessor.INSTANCE)
         .writer(personItemWriter)

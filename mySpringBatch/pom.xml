@@ -27,6 +27,7 @@
 			 <groupId>org.springframework</groupId>
     		 <artifactId>spring-oxm</artifactId>
 		</dependency>
+		<!-- spring oxm is for object xml mapping --> 
 		
 		<dependency>
    			 <groupId>jakarta.xml.bind</groupId>
@@ -38,9 +39,9 @@
             <artifactId>jaxb-runtime</artifactId>
         </dependency>
 		
-	    <!-- spring oxm is for object xml mapping --> 	
+	    	
 
-       <!-- h2 in memory (or ...) database is required/advised for JobRepository persistance -->
+       <!-- h2 in memory (or ...) database is required for JobRepository persistance -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>

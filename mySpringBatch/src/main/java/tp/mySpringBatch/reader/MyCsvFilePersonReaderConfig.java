@@ -1,12 +1,10 @@
 package tp.mySpringBatch.reader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
-import org.springframework.batch.item.file.mapping.FieldSetMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +16,8 @@ import tp.mySpringBatch.model.Person;
 @Configuration
 public class MyCsvFilePersonReaderConfig {
 	
+	public static final Logger logger = LoggerFactory.getLogger(MyCsvFilePersonReaderConfig.class);
+	
 	@Value("file:data/input/csv/inputData.csv") //to read in project root directory
 	  //NB: by default @Value(path) is @Value("classpath:path) //to read in src/main/resource or other classpath part
 	  private Resource inputCsvResource;
@@ -25,8 +25,15 @@ public class MyCsvFilePersonReaderConfig {
 	
 	//V2 with FlatFileItemReaderBuilder
 	  @Bean @Qualifier("csv")
-	  public FlatFileItemReader<Person> personCsvFileReader() {
+	  @JobScope
+	  public FlatFileItemReader<Person> personCsvFileReader(
+				@Value("#{jobParameters['msg1']}") String msg1
+			  ) {
 		  
+		//just to see that @Value("#{jobParameters['msg1']}")
+		//can be used in @JobScope or @StepScope ItemReader @Bean
+		logger.info("in @Bean personCsvFileReader() , msg1="+msg1);
+		
 		return new FlatFileItemReaderBuilder<Person>()
 				.name("personCsvFileReader")
 				.resource(inputCsvResource)

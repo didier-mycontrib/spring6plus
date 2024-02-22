@@ -1,30 +1,25 @@
 package tp.mySpringBatch.tasklet;
 
 import org.springframework.batch.core.StepContribution;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-public class PrintMessageTasklet implements Tasklet{
+@Component
+@StepScope
+//@JobScope
+public class PrintJobParamMessageTasklet implements Tasklet{
 	
-	private String message;
-
-	public void setMessage(String message) {
-	      this.message = message;
-    }
+	@Value("#{jobParameters['msg1']}") 
+	private String msg1="default_msg1";
 	
-	public PrintMessageTasklet(String message) {
-		super();
-		this.message = message;
-	}
-
-	public PrintMessageTasklet() {
-		this("?");
-	}
 
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-		System.out.println(message);
+		System.out.println(msg1);
 		return RepeatStatus.FINISHED;
 	}
 

@@ -51,13 +51,14 @@ public class MyBasicCsvToJsonJobConfig extends MyAbstractJobConfig{
 
   @Bean @Qualifier("csvToJson")
   public Step stepCsvToJson(@Qualifier("csv") ItemReader<Person> personItemReader,
-		            @Qualifier("json") ItemWriter<Person> personItemWriter ) {
+		            @Qualifier("json") ItemWriter<Person> personItemWriter ,
+		            SimpleUppercasePersonProcessor simpleUppercasePersonProcessor) {
     var name = "CSV RECORDS To Json Step";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)
         .reader(personItemReader)
-        .processor(SimpleUppercasePersonProcessor.INSTANCE)
+        .processor(simpleUppercasePersonProcessor)
         .writer(personItemWriter)
         .build();
   }

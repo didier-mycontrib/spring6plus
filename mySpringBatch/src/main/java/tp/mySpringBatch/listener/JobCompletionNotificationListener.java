@@ -6,6 +6,8 @@ import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 
+//ok as it without @Component and used with this code:
+//.listener(new JobCompletionNotificationListener()) in a job definition @Bean
 public class JobCompletionNotificationListener implements JobExecutionListener {
 
   private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);

@@ -33,13 +33,14 @@ public class MyBasicJsonToXmlJobConfig extends MyAbstractJobConfig{
 
   @Bean @Qualifier("jsonToXml")
   public Step stepJsonToXml(@Qualifier("json") ItemReader<Person> personItemReader,
-		                   @Qualifier("xml") ItemWriter<Person> personItemWriter ) {
+		                   @Qualifier("xml") ItemWriter<Person> personItemWriter,
+				            SimpleUppercasePersonProcessor simpleUppercasePersonProcessor) {
     var name = "COPY json RECORDS To  xml Step";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)
         .reader(personItemReader)
-        .processor(SimpleUppercasePersonProcessor.INSTANCE)
+        .processor(simpleUppercasePersonProcessor)
         .writer(personItemWriter)
         .build();
   }

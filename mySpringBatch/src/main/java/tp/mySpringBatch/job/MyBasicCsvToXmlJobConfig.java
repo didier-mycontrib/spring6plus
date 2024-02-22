@@ -51,13 +51,14 @@ public class MyBasicCsvToXmlJobConfig extends MyAbstractJobConfig{
 
   @Bean @Qualifier("csvToXml")
   public Step stepCsvToXml(@Qualifier("csv") ItemReader<Person> personItemReader,
-		            @Qualifier("xml") ItemWriter<Person> personItemWriter ) {
+		            @Qualifier("xml") ItemWriter<Person> personItemWriter,
+		            SimpleUppercasePersonProcessor simpleUppercasePersonProcessor ) {
     var name = "COPY CSV RECORDS To another CSV Step";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)
         .reader(personItemReader)
-        .processor(SimpleUppercasePersonProcessor.INSTANCE)
+        .processor(simpleUppercasePersonProcessor)
         .writer(personItemWriter)
         .build();
   }

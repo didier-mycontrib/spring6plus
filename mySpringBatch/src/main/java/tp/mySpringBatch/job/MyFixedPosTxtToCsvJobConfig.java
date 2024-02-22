@@ -46,13 +46,14 @@ public class MyFixedPosTxtToCsvJobConfig extends MyAbstractJobConfig{
 
   @Bean @Qualifier("fixedPosTxtToCsv")
   public Step stepFixedPosTxtToCsv(@Qualifier("fixedPosTxt") ItemReader<Person> personItemReader,
-		                           @Qualifier("csv") ItemWriter<Person> personItemWriter  ) {
+		                           @Qualifier("csv") ItemWriter<Person> personItemWriter ,
+		       		               SimpleUppercasePersonProcessor simpleUppercasePersonProcessor ) {
     var name = "COPY CSV RECORDS To another CSV Step";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)
         .reader(personItemReader)
-        .processor(SimpleUppercasePersonProcessor.INSTANCE)
+        .processor(simpleUppercasePersonProcessor)
         .writer(personItemWriter)
         .build();
   }

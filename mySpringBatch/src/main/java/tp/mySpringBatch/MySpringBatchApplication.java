@@ -33,11 +33,12 @@ public class MySpringBatchApplication implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
 	//Job job = (Job) applicationContext.getBean("myHelloWorldJob");
+	//Job job = (Job) applicationContext.getBean("myHelloWorldWithParameterJob");
     //Job job = (Job) applicationContext.getBean("copyFromCsvToCsvJob");
 	//Job job = (Job) applicationContext.getBean("fromFixedPosTxtToCsvJob");
-    // Job job = (Job) applicationContext.getBean("fromCsvToXmlJob");
+     Job job = (Job) applicationContext.getBean("fromCsvToXmlJob");
 	// Job job = (Job) applicationContext.getBean("fromCsvToJsonJob");
-	  Job job = (Job) applicationContext.getBean("fromCsvToFixedPosTxtJob");
+	//  Job job = (Job) applicationContext.getBean("fromCsvToFixedPosTxtJob");
 	// Job job = (Job) applicationContext.getBean("fromXmlToCsvJob");
 	// Job job = (Job) applicationContext.getBean("fromJsonToXmlJob");
     //Job job = (Job) applicationContext.getBean("insertIntoDbFromCsvJob");
@@ -46,6 +47,8 @@ public class MySpringBatchApplication implements CommandLineRunner {
 
     JobParameters jobParameters = new JobParametersBuilder()
         .addString("JobID", String.valueOf(System.currentTimeMillis()))
+        .addString("msg1", "_my_msg1_value_")//used by PrintJobParamMessageTaskletBean and some Reader/Writer
+        .addString("enableUpperCase", "true")//used by SimpleUppercasePersonProcessor
         .toJobParameters();
 
     var jobExecution = jobLauncher.run(job, jobParameters);

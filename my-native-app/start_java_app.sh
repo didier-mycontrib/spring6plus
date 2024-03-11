@@ -1,0 +1,1 @@
+java --cp my-native-app.jar tp.mynativeapp.MyNativeAppApplication > res.txt 2>&1

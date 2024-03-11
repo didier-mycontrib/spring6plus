@@ -1,0 +1,1 @@
+mvn clean package > resBuild.txt 2>&1

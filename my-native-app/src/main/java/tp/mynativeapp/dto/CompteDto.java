@@ -1,17 +1,13 @@
 package tp.mynativeapp.dto;
 
-import org.hibernate.validator.constraints.Length;
-
-import jakarta.validation.constraints.Min;
-
 public class CompteDto {
 	
     private Long numero;
     
-    @Length(min=2, max=30, message = "Nom trop long ou trop court")
+
 	private String label;
     
-    @Min(-999)
+   
 	private Double solde;
 
 	

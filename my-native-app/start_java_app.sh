@@ -1,1 +1,1 @@
-java -classpath ./target/my-native-app.jar tp.mynativeapp.MyNativeAppApplication > res.txt 2>&1
+java -jar ./target/my-native-app.jar > res.txt 2>&1

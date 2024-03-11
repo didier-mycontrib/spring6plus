@@ -1,0 +1,1 @@
+mvn spring-boot:build-image > resBuild.txt 2>&1

@@ -9,15 +9,15 @@
 			   virement interne (mini-banque) pour le client <span th:text="${numClient}"></span>
 			 </div>
       <div class="card-body">
-	  <form action="doVirement"  
+	  <form th:action="@{/site/compte/doVirement}"  
 	        th:object="${virementForm}" method="POST">	        
 	            <input type="hidden"   th:name="${_csrf.parameterName}"      th:value="${_csrf.token}"/>
 	            
 			     <div class="form-group row">
 				    <label class="control-label text-sm-end col-sm-4">numCptDeb:</label> <!-- <span id="spanIdProd"></span> -->
 					<div class="col-sm-8">	
-					    <!-- nb: syntaxe th:field en *{...} pour s�lectionner une sous partie 
-					         de l'objet pr�cis� par th:object du formulaire -->
+					    <!-- nb: syntaxe th:field en *{...} pour selectionner une sous partie 
+					         de l'objet precisee par th:object du formulaire -->
 						<select th:field="*{numCptDeb}" class="form-control">
 	                          <option th:each ="cpt : ${comptes}" th:value="${cpt.numero}" th:utext="${cpt.numero} + ' - ' + ${cpt.label} + ' : ' + ${cpt.solde}"></option>
 	                    </select>

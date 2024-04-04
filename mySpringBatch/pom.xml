@@ -27,7 +27,17 @@
 			 <groupId>org.springframework</groupId>
     		 <artifactId>spring-oxm</artifactId>
 		</dependency>
-		<!-- spring oxm is for object xml mapping --> 
+		<!-- spring oxm is for object xml mapping 
+		     OXM is an abstract high level api .
+		     implementations can be based on jaxb2 (with annotations) 
+		     or on xstream (without annotations but with mapping config)
+		--> 
+		
+		 <dependency>
+       		 <groupId>com.thoughtworks.xstream</groupId>
+        	<artifactId>xstream</artifactId>
+        	<version>1.4.20</version>
+    	</dependency>
 		
 		<dependency>
    			 <groupId>jakarta.xml.bind</groupId>

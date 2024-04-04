@@ -1,4 +1,4 @@
-firstname;lastname;age;active
+firstName;lastName;age;active
 Jean;Bon;41;true
 Alex;Therieur;42;false
 Axelle;Aire;33;true

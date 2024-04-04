@@ -51,7 +51,7 @@ public class JobRepositoryBatchConfig {
 	      .build();
 	}
 
-  @Bean(name="batchTransactionManager") @Qualifier("batch")
+  @Bean(name={"batchTransactionManager"}) @Qualifier("batch")
   public PlatformTransactionManager batchTransactionManager(@Qualifier("batch") DataSource batchDataSource) {
     return new DataSourceTransactionManager(batchDataSource);
   }

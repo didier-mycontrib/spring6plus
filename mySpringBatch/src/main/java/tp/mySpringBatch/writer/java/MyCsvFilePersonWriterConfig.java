@@ -1,5 +1,6 @@
 package tp.mySpringBatch.writer.java;
 
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,15 +15,12 @@ import tp.mySpringBatch.model.Person;
 @Configuration
 @Profile("!xmlJobConfig")
 public class MyCsvFilePersonWriterConfig {
-
-	  
-	 
 	  
 	  @Value("file:data/output/csv/outputData.csv") //to read in project root directory
 	  //NB: by default @Value(path) is @Value("classpath:path) //to read in src/main/resource or other classpath part
 	  private WritableResource outputCsvResource;
-
 	  
+	 
 	  //V2 with builder:
 	  @Bean @Qualifier("csv")
 	  FlatFileItemWriter<Person> csvFilePersonWriter() {
@@ -37,6 +35,7 @@ public class MyCsvFilePersonWriterConfig {
 				  .build();
 	  }
 	  
+	 
 	  /*
 	  //V1 without builder and with sub methods:
 	  

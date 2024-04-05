@@ -20,7 +20,9 @@ import org.springframework.context.annotation.Profile;
 	             "classpath:job/fromJsonToXmlJob.xml",
 	             "classpath:job/fromXmlToCsvJob.xml",
 	             "classpath:job/fromCsvToJsonJob.xml",
-	             "classpath:job/withMyTaskletJob.xml"})
+	             "classpath:job/withMyTaskletJob.xml",
+	             "classpath:job/myFlowJobs.xml",
+	             "classpath:job/myPartitionJob.xml"})
 public class SomeJobsFromXmlConfig {
 
   public static final Logger logger = LoggerFactory.getLogger(SomeJobsFromXmlConfig.class);

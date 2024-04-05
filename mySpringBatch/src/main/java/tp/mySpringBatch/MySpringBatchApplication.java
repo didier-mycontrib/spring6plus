@@ -22,8 +22,8 @@ public class MySpringBatchApplication implements CommandLineRunner {
 		if(profilsActifs!=null) {
 			System.out.println("spring.profiles.active="+profilsActifs);
 		}else {
-			String defaultProfils  = "xmlJobConfig";
-			//String defaultProfils  = "";
+			//String defaultProfils  = "xmlJobConfig";
+			String defaultProfils  = "";
 			System.setProperty("spring.profiles.default", defaultProfils);
 			System.out.println("spring.profiles.default="+defaultProfils);
 		}
@@ -50,7 +50,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	 */
 
 	  //Job job = (Job) applicationContext.getBean("myHelloWorldJob");
-	  Job job = (Job) applicationContext.getBean("myHelloWorldWithParameterJob");
+	  //Job job = (Job) applicationContext.getBean("myHelloWorldWithParameterJob");
       //Job job = (Job) applicationContext.getBean("copyFromCsvToCsvJob");
 	  //Job job = (Job) applicationContext.getBean("fromFixedPosTxtToCsvJob");
       // Job job = (Job) applicationContext.getBean("fromCsvToXmlJob");
@@ -61,6 +61,10 @@ public class MySpringBatchApplication implements CommandLineRunner {
       // Job job = (Job) applicationContext.getBean("insertIntoDbFromCsvJob");
 	  // Job job = (Job) applicationContext.getBean("insertIntoCsvFromDbJob");
 	  //Job job = (Job) applicationContext.getBean("withMyTaskletJob");
+	  
+	  //Job job  = (Job) applicationContext.getBean("mySimpleSequentialStepsJob");
+	  //Job job  = (Job) applicationContext.getBean("mySimpleConditionalStepsJob");
+	  Job job  = (Job) applicationContext.getBean("myPartitionJob");
 
     JobParameters jobParameters = new JobParametersBuilder()
         .addString("JobID", String.valueOf(System.currentTimeMillis()))

@@ -22,6 +22,7 @@ public class DatabaseToCsvJobConfig extends MyAbstractJobConfig{
 
   public static final Logger logger = LoggerFactory.getLogger(DatabaseToCsvJobConfig.class);
  
+ 
 
   @Bean(name="insertIntoCsvFromDbJob")
   public Job insertIntoCsvFromDbJob(@Qualifier("dbToCsv") Step step1) {

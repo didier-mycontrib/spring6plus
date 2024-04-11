@@ -1,6 +1,7 @@
 package tp.mySpringBatch.job.java;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
@@ -8,16 +9,21 @@ import java.util.Collection;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobInstance;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.test.AssertFile;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 import tp.mySpringBatch.MySpringBatchApplication;
 import tp.mySpringBatch.job.AbstractBasicTestJob;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBatchTest
 @SpringBootTest(classes = { MySpringBatchApplication.class} )
@@ -44,6 +50,30 @@ public class TestFileToFileJobViaJavaConf extends AbstractBasicTestJob {
        */
 		super(/*"fromCsvWithSkipsErrorsToJsonJob"*/);
 		//super("fromCsvToJsonWithRetryJob"); //WITH BUG !!!!
+	}
+	
+	@Test //test of a whole Job
+	public void testCsvToJsonJob() throws Exception{
+		
+		//given 4 good lines in input file : data/input/csv/inputData.csv
+		
+		//when executing job "fromCsvToJsonJob"
+		prepareJobFromJobName("fromCsvToJsonJob");
+	    JobExecution jobExecution = jobLauncherTestUtils.launchJob(initJobParameters());
+	    assertNotNull(jobExecution);
+	    
+	    logger.debug("jobExecution="+jobExecution.toString());
+	    	    
+	    ExitStatus actualJobExitStatus = jobExecution.getExitStatus();
+	    assertEquals("COMPLETED", actualJobExitStatus.getExitCode());
+	    
+	    //then actualResult file content should be the same as expected result file content
+	    
+	    FileSystemResource expectedResult = new FileSystemResource("data/expected_output/json/outputData.json");
+	    FileSystemResource actualResult = new FileSystemResource("data/output/json/outputData.json");
+	    //AssertFile.assertFileEquals(expectedResult, actualResult); //deprecated since v5
+	    assertThat(actualResult.getFile()).hasSameTextualContentAs(expectedResult.getFile());//via AssertJ
+	    
 	}
 	
 	@Test //unit test of a single/individual Step 

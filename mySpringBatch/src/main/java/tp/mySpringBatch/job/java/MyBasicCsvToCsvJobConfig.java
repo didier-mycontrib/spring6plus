@@ -50,7 +50,7 @@ public class MyBasicCsvToCsvJobConfig extends MyAbstractJobConfig{
   public Step stepCsvToCsv(@Qualifier("csv") ItemReader<Person> personItemReader,
 		            @Qualifier("csv") ItemWriter<Person> personItemWriter ,
 		            SimpleUppercasePersonProcessor simpleUppercasePersonProcessor) {
-    var name = "COPY CSV RECORDS To another CSV Step";
+    var name = "stepCsvToCsv";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)

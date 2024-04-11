@@ -17,3 +17,12 @@ default qualifier = beanName
 default beanName = methodName (prefixed by @Bean) or classNameWithFirstCharLowercase if @Component
 ----------
 Multiple @Qualifier may be used . ex: @qualifier("csv") @Qualifier("person")
+
+====================
+URL/liens WEB sur SpringBatch:
+
+https://fr.slideshare.net/obazoud/spring-batch-avance
+
+https://www.baeldung.com/spring-batch-testing-job
+
+https://techblog.ingeniance.fr/planifier-et-monitorer-un-batch-spring-a-laide-de-quartz-job-scheduler/

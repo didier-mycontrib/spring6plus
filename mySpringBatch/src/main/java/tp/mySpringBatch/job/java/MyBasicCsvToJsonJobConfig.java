@@ -5,35 +5,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemReaderException;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.FlatFileItemWriter;
-import org.springframework.batch.item.file.LineMapper;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
-import org.springframework.batch.item.file.mapping.FieldSetMapper;
-import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
-import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.batch.item.file.transform.FieldExtractor;
-import org.springframework.batch.item.file.transform.LineAggregator;
-import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.WritableResource;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 
+import tp.mySpringBatch.exception.MyProcessException;
 import tp.mySpringBatch.listener.JobCompletionNotificationListener;
+import tp.mySpringBatch.listener.MySkippedErrorsListener;
 import tp.mySpringBatch.model.Person;
 import tp.mySpringBatch.processor.SimpleUppercasePersonProcessor;
+import tp.mySpringBatch.processor.UppercasePersonProcessorWithFailuresForRetry;
 
 @Configuration
 @Profile("!xmlJobConfig")
@@ -44,7 +31,7 @@ public class MyBasicCsvToJsonJobConfig extends MyAbstractJobConfig{
 
   @Bean
   public Job fromCsvToJsonJob(@Qualifier("csvToJson") Step step1) {
-    var name = "Persons CsvToJson Job";
+    var name = "fromCsvToJsonJob";//same as method name for simple mind developper
     var jobBuilder = new JobBuilder(name, jobRepository);
     return jobBuilder.start(step1)
     		.listener(new JobCompletionNotificationListener())
@@ -55,7 +42,7 @@ public class MyBasicCsvToJsonJobConfig extends MyAbstractJobConfig{
   public Step stepCsvToJson(@Qualifier("csv") ItemReader<Person> personItemReader,
 		            @Qualifier("json") ItemWriter<Person> personItemWriter ,
 		            SimpleUppercasePersonProcessor simpleUppercasePersonProcessor) {
-    var name = "CSV RECORDS To Json Step";
+    var name = "stepCsvToJson";//same as method name for simple mind developper
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)
@@ -63,6 +50,63 @@ public class MyBasicCsvToJsonJobConfig extends MyAbstractJobConfig{
         .processor(simpleUppercasePersonProcessor)
         .writer(personItemWriter)
         .build();
+  }
+  
+  @Bean
+  public Job fromCsvWithSkipsErrorsToJsonJob(@Qualifier("csvWithSkipsErrorsToJson") Step step1) {
+    var name = "fromCsvWithSkipsErrorsToJsonJob"; //same as method name for simple mind developper
+    var jobBuilder = new JobBuilder(name, jobRepository);
+    return jobBuilder.start(step1)
+    		.listener(new JobCompletionNotificationListener())
+    		.build();
+  }
+
+  @Bean @Qualifier("csvWithSkipsErrorsToJson")
+  public Step stepCsvWithSkipsErrorsToJson(@Qualifier("csvWithErrors") ItemReader<Person> personItemReader,
+		            @Qualifier("json") ItemWriter<Person> personItemWriter ,
+		            SimpleUppercasePersonProcessor simpleUppercasePersonProcessor) {
+    var name = "stepCsvWithSkipsErrorsToJson";
+    var stepBuilder = new StepBuilder(name, jobRepository);
+    return stepBuilder
+        .<Person, Person>chunk(5, batchTxManager)
+        .listener(new MySkippedErrorsListener())
+        .reader(personItemReader)
+        .processor(simpleUppercasePersonProcessor)
+        .writer(personItemWriter)
+        .faultTolerant().skipLimit(5).skip(ItemReaderException.class) //IMPORTANT
+        .listener(new MySkippedErrorsListener())//IMPORTANT
+        .build();
+    
+    //NB: .skipLimit(globalInclusiveMaxLimit) , not consecutive error count but global count
+  }
+  
+  @Bean
+  public Job fromCsvToJsonWithRetryJob(@Qualifier("csvToJsonWithRetry") Step step1) {
+    var name = "fromCsvToJsonWithRetryJob";
+    var jobBuilder = new JobBuilder(name, jobRepository);
+    return jobBuilder.start(step1)
+    		.listener(new JobCompletionNotificationListener())
+    		.build();
+  }
+
+  @Bean @Qualifier("csvToJsonWithRetry")
+  public Step stepCsvToJsonWithRetry(@Qualifier("csv") ItemReader<Person> personItemReader,
+		            @Qualifier("json") ItemWriter<Person> personItemWriter ,
+		            UppercasePersonProcessorWithFailuresForRetry uppercasePersonProcessorWithFailuresForRetry) {
+    var name = "stepCsvToJsonWithRetry";
+    var stepBuilder = new StepBuilder(name, jobRepository);
+    return stepBuilder
+        .<Person, Person>chunk(5, batchTxManager)
+        .listener(new MySkippedErrorsListener())
+        .reader(personItemReader)
+        .processor(uppercasePersonProcessorWithFailuresForRetry)
+        .writer(personItemWriter)
+        .faultTolerant()
+        //.backOffPolicy(new ExponentialBackOffPolicy())
+        .retryLimit(3).retry(MyProcessException.class) //IMPORTANT BUT BUG IN JAVA (not XML)  !!!!
+        //MyProcessException a non Skippable exception !!!!
+        .build();
+    
   }
   
   

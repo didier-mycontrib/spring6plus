@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import tp.mySpringBatch.listener.JobCompletionNotificationListener;
-import tp.mySpringBatch.tasklet.bean.PrintFixedHelloWorldMessageTasklet;
+import tp.mySpringBatch.tasklet.bean.PrintHelloWorldMessageTaskletBean;
 
 @Configuration
 @Profile("!xmlJobConfig")
@@ -35,7 +35,7 @@ public class HelloWorldJobConfig extends MyAbstractJobConfig{
   }
 
   @Bean
-  public Step simplePrintMessageStep(PrintFixedHelloWorldMessageTasklet printFixedHelloWorldMessageTasklet){
+  public Step simplePrintMessageStep(PrintHelloWorldMessageTaskletBean printFixedHelloWorldMessageTasklet){
     var name = "simplePrintMessageStep";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder

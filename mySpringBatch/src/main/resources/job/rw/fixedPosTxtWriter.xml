@@ -19,14 +19,7 @@
              <property name = "format" value = "%-24s%-24s%-4d%-6b" />
              <property name="fieldExtractor">
                    <bean class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
-                          <property name = "names" >
-		                      <list>
-		                          <value>firstName</value>
-		                          <value>lastName</value>
-		                          <value>age</value>
-		                          <value>active</value>
-		                      </list>
-                  		 </property>
+                          <property name = "names" value="firstName,lastName,age,active" />			                      
                     </bean>
              </property>
         </bean>

@@ -17,5 +17,8 @@ public class JobCompletionNotificationListener implements JobExecutionListener {
     if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
       log.info(" --- JOB FINISHED : " + jobExecution.toString());
     }
+    else {
+      log.error(" --- JOB FINISHED : " + jobExecution.toString());
+    }
   }
 }

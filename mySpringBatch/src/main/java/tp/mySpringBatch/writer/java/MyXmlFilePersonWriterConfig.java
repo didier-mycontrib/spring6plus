@@ -58,9 +58,7 @@ public class MyXmlFilePersonWriterConfig {
 		//PROBLEM with @JobScope or @StepScope : 
 		//org.springframework.batch.item.WriterNotOpenException: Writer must be open before it can be written to 
 		  
-		  XStreamMarshaller a = new XStreamMarshaller();
-		 a.setTypePermissions(null);
-		  
+			  
 		  var personXmlMarshaller = new Jaxb2Marshaller();
 		  personXmlMarshaller.setClassesToBeBound(new Class[] { Person.class });
 		  

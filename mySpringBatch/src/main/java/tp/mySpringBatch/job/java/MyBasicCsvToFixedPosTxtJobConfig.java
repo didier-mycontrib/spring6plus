@@ -50,7 +50,7 @@ public class MyBasicCsvToFixedPosTxtJobConfig extends MyAbstractJobConfig{
   public Step stepCsvToFixedPosTxt(@Qualifier("csv") ItemReader<Person> personItemReader,
 		                   @Qualifier("fixedPosTxt") ItemWriter<Person> personItemWriter ,
 		                   SimpleUppercasePersonProcessor simpleUppercasePersonProcessor) {
-    var name = "COPY CSV RECORDS To fixedPosTxt Step";
+    var name = "stepCsvToFixedPosTxt";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)

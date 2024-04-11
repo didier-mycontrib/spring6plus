@@ -57,7 +57,7 @@ public class WithTaskletJobConfig extends MyAbstractJobConfig{
   public Step stepJobExecutionContextToCsv(@Qualifier("fromJobExecutionContext") ItemReader<Person>  personItemReader,
 		                   @Qualifier("csv") ItemWriter<Person> personItemWriter ,
 				            SimpleUppercasePersonProcessor simpleUppercasePersonProcessor ) {
-    var name = "COPY Generated RECORDS into JobExecutionContext To  CSV Step";
+    var name = "stepJobExecutionContextToCsv";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)

@@ -10,7 +10,14 @@ public class PrintMessageTasklet implements Tasklet{
 	
 	private String message;
 	
+	public PrintMessageTasklet(String message) {
+		this.message = message;
+	}
 	
+	public PrintMessageTasklet() {
+		super();
+	}
+
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 		System.out.println(message);

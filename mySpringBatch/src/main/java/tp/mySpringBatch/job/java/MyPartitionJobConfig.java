@@ -27,7 +27,7 @@ public class MyPartitionJobConfig extends MyAbstractJobConfig{
   
   @Bean(name="myPartitionJob")
   public Job myPartitionJob(@Qualifier("managerDbToCsv") Step managerStep) {
-    var name = "myPartitionJob_DbToCsv";
+    var name = "myPartitionJob";
     var builder = new JobBuilder(name, jobRepository);
     return builder.start(managerStep).listener(new JobCompletionNotificationListener()).build();
   }
@@ -61,7 +61,7 @@ public class MyPartitionJobConfig extends MyAbstractJobConfig{
   @Bean @Qualifier("workerDbToCsv")
   public Step workStepDbToCsv(@Qualifier("db_withPartition") ItemReader<Person> reader,
 		                      @Qualifier("csv_withPartition") ItemWriter<Person> writer) {
-    var name = "Extract CSV RECORDS From DB Step With partition";
+    var name = "workStepDbToCsv";
     var builder = new StepBuilder(name, jobRepository);
     return builder
         .<Person, Person>chunk(1, batchTxManager)

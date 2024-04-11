@@ -9,9 +9,14 @@
 	http://www.springframework.org/schema/util 
 	https://www.springframework.org/schema/util/spring-util.xsd">
     
+ <bean id="inputDataCsvResource" class="tp.mySpringBatch.job.xml.MyResourceFactoryBean"  >
+    <property name="path" value="data/input/csv/inputData.csv" />
+ </bean> 
+    
  <bean id = "personCsvFileReader" 
       class = "org.springframework.batch.item.file.FlatFileItemReader">  
-      <property name = "resource" value = "file:data/input/csv/inputData.csv" /> 
+     <!--   <property name = "resource" value = "file:data/input/csv/inputData.csv" /> -->
+      <property name = "resource" ref = "inputDataCsvResource" /> 
       <property name = "linesToSkip" value = "1" /> 
       <property name = "lineMapper"> 
          <bean 
@@ -19,13 +24,31 @@
             <property name = "lineTokenizer"> 
                <bean    
                   class = "org.springframework.batch.item.file.transform.DelimitedLineTokenizer"> 
-                  <property name = "names" >
-                      <list>
-                          <value>firstName</value>
-                          <value>lastName</value>
-                          <value>age</value>
-                          <value>active</value>
-                      </list>
+                  <property name = "names" value="firstName,lastName,age,active">
+                  </property>
+                  <property name = "delimiter" value = ";" />
+               </bean> 
+            </property> 
+            <property name = "fieldSetMapper"> 
+               <bean class = "org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper" >
+                     <property name = "targetType" value = "tp.mySpringBatch.model.Person" />
+               </bean> 
+            </property> 
+         </bean> 
+      </property> 
+   </bean>    
+   
+   <bean id = "personCsvWithErrorsFileReader" 
+      class = "org.springframework.batch.item.file.FlatFileItemReader">  
+      <property name = "resource" value = "file:data/input/csv/inputDataWithErrors.csv" /> 
+      <property name = "linesToSkip" value = "1" /> 
+      <property name = "lineMapper"> 
+         <bean 
+            class = "org.springframework.batch.item.file.mapping.DefaultLineMapper"> 
+            <property name = "lineTokenizer"> 
+               <bean    
+                  class = "org.springframework.batch.item.file.transform.DelimitedLineTokenizer"> 
+                  <property name = "names" value="firstName,lastName,age,active">
                   </property>
                   <property name = "delimiter" value = ";" />
                </bean> 
@@ -38,6 +61,7 @@
          </bean> 
       </property> 
    </bean>                       
+                    
  
    
  </beans>

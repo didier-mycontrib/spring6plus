@@ -2,11 +2,6 @@ package tp.mySpringBatch.writer.java;
 
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
-import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
-import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
-import org.springframework.batch.item.file.transform.FieldExtractor;
-import org.springframework.batch.item.file.transform.FormatterLineAggregator;
-import org.springframework.batch.item.file.transform.LineAggregator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

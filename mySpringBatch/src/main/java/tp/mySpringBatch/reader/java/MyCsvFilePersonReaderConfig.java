@@ -23,6 +23,9 @@ public class MyCsvFilePersonReaderConfig {
 	@Value("file:data/input/csv/inputData.csv") //to read in project root directory
 	  //NB: by default @Value(path) is @Value("classpath:path) //to read in src/main/resource or other classpath part
 	  private Resource inputCsvResource;
+	
+	@Value("file:data/input/csv/inputDataWithErrors.csv") //to read in project root directory
+	  private Resource inputCsvWithErrorsResource;
 
 	
 	//V2 with FlatFileItemReaderBuilder
@@ -40,6 +43,22 @@ public class MyCsvFilePersonReaderConfig {
 		return new FlatFileItemReaderBuilder<Person>()
 				.name("personCsvFileReader")
 				.resource(inputCsvResource)
+				.linesToSkip(1)
+				.delimited()
+				.delimiter(";")
+				.names("firstName", "lastName", "age", "active")
+				.targetType(Person.class)
+				.build();
+	  }
+	  
+	  @Bean @Qualifier("csvWithErrors")
+	  @JobScope
+	  public FlatFileItemReader<Person> personCsvWithErrorsFileReader() {
+		  
+	
+		return new FlatFileItemReaderBuilder<Person>()
+				.name("personCsvWithErrorsFileReader")
+				.resource(inputCsvWithErrorsResource)
 				.linesToSkip(1)
 				.delimited()
 				.delimiter(";")

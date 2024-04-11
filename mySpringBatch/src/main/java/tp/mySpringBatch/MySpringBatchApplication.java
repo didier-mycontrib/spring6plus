@@ -1,20 +1,23 @@
 package tp.mySpringBatch;
 
+import java.util.Date;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication()
 public class MySpringBatchApplication implements CommandLineRunner {
 
   private final JobLauncher jobLauncher;
   private final ApplicationContext applicationContext;
+  private static boolean launchRunAfterMain=false;
   
   public static void initProfiles() {
 		//java .... -Dspring.profiles.active=reInit,dev
@@ -29,6 +32,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
 		}
 	}
 
+  @Autowired
   public MySpringBatchApplication(JobLauncher jobLauncher,
 		                          ApplicationContext applicationContext) {
 	//injection by constructor  
@@ -37,12 +41,18 @@ public class MySpringBatchApplication implements CommandLineRunner {
   }
 
   public static void main(String[] args) {
-	initProfiles();
-    SpringApplication.run(MySpringBatchApplication.class, args);
+		initProfiles();
+		launchRunAfterMain=true;
+		SpringApplication.run(MySpringBatchApplication.class, args);
   }
 
   @Override //from CommandLineRunner interface (run automatically)
   public void run(String... args) throws Exception {
+	  if(launchRunAfterMain)
+	      runAfterMain(args);
+  }
+  
+  public void runAfterMain(String... args) throws Exception {
 	  
 	/*
 	 NB: if xmlJobConfig profile is activated ,
@@ -50,7 +60,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	 */
 
 	  //Job job = (Job) applicationContext.getBean("myHelloWorldJob");
-	  //Job job = (Job) applicationContext.getBean("myHelloWorldWithParameterJob");
+	  Job job = (Job) applicationContext.getBean("myHelloWorldWithParameterJob");
       //Job job = (Job) applicationContext.getBean("copyFromCsvToCsvJob");
 	  //Job job = (Job) applicationContext.getBean("fromFixedPosTxtToCsvJob");
       // Job job = (Job) applicationContext.getBean("fromCsvToXmlJob");
@@ -64,10 +74,10 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	  
 	  //Job job  = (Job) applicationContext.getBean("mySimpleSequentialStepsJob");
 	  //Job job  = (Job) applicationContext.getBean("mySimpleConditionalStepsJob");
-	  Job job  = (Job) applicationContext.getBean("myPartitionJob");
+	  //Job job  = (Job) applicationContext.getBean("myPartitionJob");
 
     JobParameters jobParameters = new JobParametersBuilder()
-        .addString("JobID", String.valueOf(System.currentTimeMillis()))
+        .addLong("timeStampOfJobInstance", System.currentTimeMillis())//Necessary for running several instances of a same job (each jobInstance must have a parameter that changes)
         .addString("msg1", "_my_msg1_value_")//used by PrintJobParamMessageTaskletBean and some Reader/Writer
         .addString("enableUpperCase", "true")//used by SimpleUppercasePersonProcessor
         .toJobParameters();

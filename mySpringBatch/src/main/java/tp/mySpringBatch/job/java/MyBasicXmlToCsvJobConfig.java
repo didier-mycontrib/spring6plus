@@ -44,7 +44,7 @@ public class MyBasicXmlToCsvJobConfig extends MyAbstractJobConfig{
 
   @Bean
   public Job fromXmlToCsvJob(@Qualifier("xmlToCsv") Step step1) {
-    var name = "Persons XmlToCsv Job";
+    var name = "fromXmlToCsvJob";
     var jobBuilder = new JobBuilder(name, jobRepository);
     return jobBuilder.start(step1)
     		.listener(new JobCompletionNotificationListener())
@@ -55,7 +55,7 @@ public class MyBasicXmlToCsvJobConfig extends MyAbstractJobConfig{
   public Step stepXmlToCsv(@Qualifier("xml") ItemReader<Person> personItemReader,
 		                   @Qualifier("csv") ItemWriter<Person> personItemWriter ,
 				            SimpleUppercasePersonProcessor simpleUppercasePersonProcessor) {
-    var name = "COPY xml RECORDS To  CSV Step";
+    var name = "stepXmlToCsv";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)

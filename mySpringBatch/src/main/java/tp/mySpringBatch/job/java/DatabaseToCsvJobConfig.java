@@ -26,7 +26,7 @@ public class DatabaseToCsvJobConfig extends MyAbstractJobConfig{
 
   @Bean(name="insertIntoCsvFromDbJob")
   public Job insertIntoCsvFromDbJob(@Qualifier("dbToCsv") Step step1) {
-    var name = "Persons export Job";
+    var name = "insertIntoCsvFromDbJob";
     var builder = new JobBuilder(name, jobRepository);
     return builder.start(step1).listener(new JobCompletionNotificationListener()).build();
   }
@@ -34,7 +34,7 @@ public class DatabaseToCsvJobConfig extends MyAbstractJobConfig{
   @Bean @Qualifier("dbToCsv")
   public Step stepDbToCsv(@Qualifier("db") ItemReader<Person> reader,
 		            @Qualifier("csv") ItemWriter<Person> writer) {
-    var name = "Extract CSV RECORDS From DB Step";
+    var name = "stepDbToCsv";
     var builder = new StepBuilder(name, jobRepository);
     return builder
         .<Person, Person>chunk(5, batchTxManager)

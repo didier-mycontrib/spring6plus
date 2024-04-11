@@ -1,5 +1,6 @@
 package tp.mySpringBatch.processor;
 
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import tp.mySpringBatch.model.Person;
 
 @Component
 @StepScope
+//@JobScope
 public class SimpleUppercasePersonProcessor implements ItemProcessor<Person,Person>{
 	
 	@Value("#{jobParameters['enableUpperCase']}") 

@@ -34,8 +34,8 @@ public class PrintMessageWithDelayTasklet implements Tasklet{
 		if(message==null ||  message.toLowerCase().contains("error"))
 			contribution.setExitStatus(ExitStatus.FAILED);
 		else
-		    //contribution.setExitStatus(ExitStatus.COMPLETED);
-			contribution.setExitStatus(new ExitStatus("OK"));
+		    contribution.setExitStatus(ExitStatus.COMPLETED);
+			//contribution.setExitStatus(new ExitStatus("OK"));
 		//NB: if error detected in processor : this.stepExecution.setExitStatus(ExitStatus.FAILED);
 		return RepeatStatus.FINISHED;
 	}

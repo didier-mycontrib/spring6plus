@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = "person") //just for genrate XML file
+@XmlRootElement(name = "person") //just for read/generate XML file wkith jaxb2 marshaller
 //implements Serializable just for serialize the execution context (if needed)
 public class Person implements Serializable{
 

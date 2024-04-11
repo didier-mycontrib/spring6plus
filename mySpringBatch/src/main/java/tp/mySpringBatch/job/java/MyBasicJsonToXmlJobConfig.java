@@ -26,7 +26,7 @@ public class MyBasicJsonToXmlJobConfig extends MyAbstractJobConfig{
 
   @Bean
   public Job fromJsonToXmlJob(@Qualifier("jsonToXml") Step step1) {
-    var name = "Persons jsonToXml Job";
+    var name = "fromJsonToXmlJob";
     var jobBuilder = new JobBuilder(name, jobRepository);
     return jobBuilder.start(step1)
     		.listener(new JobCompletionNotificationListener())
@@ -37,7 +37,7 @@ public class MyBasicJsonToXmlJobConfig extends MyAbstractJobConfig{
   public Step stepJsonToXml(@Qualifier("json") ItemReader<Person> personItemReader,
 		                   @Qualifier("xml") ItemWriter<Person> personItemWriter,
 				            SimpleUppercasePersonProcessor simpleUppercasePersonProcessor) {
-    var name = "COPY json RECORDS To  xml Step";
+    var name = "stepJsonToXml";
     var stepBuilder = new StepBuilder(name, jobRepository);
     return stepBuilder
         .<Person, Person>chunk(5, batchTxManager)

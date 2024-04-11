@@ -2,11 +2,6 @@ package tp.mySpringBatch.reader.java;
 
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
-import org.springframework.batch.item.file.mapping.FieldSetMapper;
-import org.springframework.batch.item.file.transform.FixedLengthTokenizer;
-import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.batch.item.file.transform.Range;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

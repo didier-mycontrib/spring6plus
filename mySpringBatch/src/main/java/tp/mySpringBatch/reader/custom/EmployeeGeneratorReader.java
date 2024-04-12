@@ -5,36 +5,39 @@ import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
 
-import tp.mySpringBatch.model.Person;
+import tp.mySpringBatch.model.Employee;
 
-public class PersonGeneratorReader extends AbstractPersonGenerator implements ItemReader<Person>{
+public class EmployeeGeneratorReader extends AbstractPersonGenerator implements ItemReader<Employee>{
 	
 
-	public PersonGeneratorReader() {
+	public EmployeeGeneratorReader() {
 		super();
 	}
 
-	public PersonGeneratorReader(long dataSetSize) {
+	public EmployeeGeneratorReader(long dataSetSize) {
 		super(dataSetSize);
 	}
 
-	private Person generatePerson(){
+	private Employee generateEmployee(){
 		index++;
 		int nbFirstNames = firstNameList.size();
 		int nbLastNames = lastNameList.size();
+		int nbFunctions = functionList.size();
 		if(index<=dataSetSize) {
 			double randomCoeff = Math.random();
 			int age = (int)((100 * randomCoeff) % 100);
+			double salary = Math.floor(2000.0 * (1 + randomCoeff));
 			String firstName = firstNameList.get((int)(nbFirstNames * randomCoeff) % nbFirstNames);
 			String lastName = lastNameList.get((int)(nbLastNames * randomCoeff) % nbLastNames);
-			return new Person(firstName , lastName ,age  , true );
+			String function = functionList.get((int)(nbFunctions * randomCoeff) % nbFunctions);
+			return new Employee(firstName , lastName ,age  , true , function,salary );
 		}else
 			return null;
 	}
 		
 	@Override
-	public Person read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
-		return generatePerson();
+	public Employee read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+		return generateEmployee();
 	}
 
 

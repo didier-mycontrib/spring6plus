@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import tp.mySpringBatch.listener.JobCompletionNotificationListener;
-import tp.mySpringBatch.model.Person;
+import tp.mySpringBatch.model.Employee;
 
 @Configuration
 @Profile("!xmlJobConfig")
@@ -30,6 +30,8 @@ public class DataSetGeneratorJobConfig extends MyAbstractJobConfig{
     return builder.start(step1).listener(new JobCompletionNotificationListener()).build();
   }
 
+  /*
+  //V1 (Person)
   @Bean @Qualifier("generatorToDb")
   public Step generatorToDb(@Qualifier("fromMyGeneratorPersonReader") ItemReader<Person> reader,
 		                    @Qualifier("generate_db") ItemWriter<Person> writer) {
@@ -41,6 +43,22 @@ public class DataSetGeneratorJobConfig extends MyAbstractJobConfig{
         .writer(writer)
         .build();
   }
+  */
+  
+ 
+  //V2 (Employee extends Person with 2 related tables: Person and Functions)
+  @Bean @Qualifier("generatorToDb")
+  public Step generatorToDb(@Qualifier("fromMyGeneratorEmployeeReader") ItemReader<Employee> reader,
+		                    @Qualifier("generate_db") ItemWriter<Employee> writer) {
+    var name = "generatorToDb";
+    var builder = new StepBuilder(name, jobRepository);
+    return builder
+        .<Employee, Employee>chunk(10, batchTxManager)
+        .reader(reader)
+        .writer(writer)
+        .build();
+  }
+ 
 
 
 }

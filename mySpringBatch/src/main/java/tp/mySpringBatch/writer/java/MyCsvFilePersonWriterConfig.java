@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.WritableResource;
 
+import tp.mySpringBatch.model.EmployeeStat;
 import tp.mySpringBatch.model.Person;
 
 @Configuration
@@ -16,8 +17,10 @@ import tp.mySpringBatch.model.Person;
 public class MyCsvFilePersonWriterConfig {
 	  
 	  @Value("file:data/output/csv/outputData.csv") //to read in project root directory
-	  //NB: by default @Value(path) is @Value("classpath:path) //to read in src/main/resource or other classpath part
 	  private WritableResource outputCsvResource;
+	  
+	  @Value("file:data/output/csv/employeeStats.csv") //to read in project root directory
+	  private WritableResource empStatsCsvResource;
 	  
 	 
 	  //V2 with builder:
@@ -31,6 +34,19 @@ public class MyCsvFilePersonWriterConfig {
 				  .delimiter(";")
 				  .names("id","firstName", "lastName", "age", "active")
 				  .headerCallback((writer)-> {writer.write("id;firstname;lastname;age;active");})
+				  .build();
+	  }
+	  
+	  @Bean @Qualifier("csv")
+	  FlatFileItemWriter<EmployeeStat> csvFileEmployeStatWriter() {
+		  
+		  return new FlatFileItemWriterBuilder<EmployeeStat>()
+				  .name("csvFileEmployeStatWriter")
+				  .resource(empStatsCsvResource)
+				  .delimited()
+				  .delimiter(";")
+				  .names("function","numberOfEmployees", "minSalary", "maxSalary", "averageSalary")
+				  .headerCallback((writer)-> {writer.write("function;numberOfEmployees;minSalary;maxSalary;averageSalary");})
 				  .build();
 	  }
 	  

@@ -6,22 +6,14 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
-import org.springframework.batch.item.xml.StaxEventItemWriter;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.batch.BatchDataSource;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.WritableResource;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
+import tp.mySpringBatch.model.Employee;
 import tp.mySpringBatch.model.Person;
+import tp.mySpringBatch.writer.custom.NewEmployeeDbWriter;
 
 @Configuration
 @Profile("!xmlJobConfig")
@@ -31,6 +23,9 @@ public class MyDbPersonWriterConfig {
 	private static final String INSERT_QUERY = """
 	      insert into person (first_name, last_name, age, is_active)
 	      values (:firstName,:lastName,:age,:active)""";
+	
+	private static final String UPDATE_FUNCTIONS_QUERY = """
+		UPDATE functions SET function = :function , salary = :salary WHERE id = :id """;
 	 
 
 	/*
@@ -56,6 +51,15 @@ public class MyDbPersonWriterConfig {
 		  .build();
 	  }
 	 
+	 @Bean @Qualifier("update_db")
+	  public ItemWriter<Employee> employeeFunctionsPartJdbcItemWriter(@Qualifier("inputdb") DataSource outputdbDataSource) {
+		 return new JdbcBatchItemWriterBuilder<Employee>()
+				  .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Employee>())
+				  .dataSource(outputdbDataSource)
+				  .sql(UPDATE_FUNCTIONS_QUERY)
+				  .build();
+	  }
+	 
 	 @Bean @Qualifier("generate_db")
 	  public JdbcBatchItemWriter<Person> genJdbcItemWriter(@Qualifier("inputdb") DataSource outputdbDataSource) {
 		 return new JdbcBatchItemWriterBuilder<Person>()
@@ -63,6 +67,11 @@ public class MyDbPersonWriterConfig {
 		  .dataSource(outputdbDataSource)
 		  .sql(INSERT_QUERY)
 		  .build();
+	  }
+	 
+	 @Bean @Qualifier("generate_db")
+	  public ItemWriter<Employee> genEmployeeJdbcItemWriter(@Qualifier("inputdb") DataSource outputdbDataSource) {
+		 return new NewEmployeeDbWriter(outputdbDataSource);
 	  }
 	
 }

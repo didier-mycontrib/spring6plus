@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 @XmlRootElement(name = "person") //just for read/generate XML file wkith jaxb2 marshaller
 //implements Serializable just for serialize the execution context (if needed)
 public class Person implements Serializable{
-	Long id; //auto-incremented in database (may be null before insert)
-    String firstName;
-    String lastName;
-    Integer age;
-    Boolean active;
+	private Long id; //auto-incremented in database (may be null before insert)
+	private String firstName;
+	private String lastName;
+	private Integer age;
+	private Boolean active;
     
 	public Person(String firstName, String lastName, Integer age, Boolean active) {
 		super();

@@ -18,3 +18,24 @@ INSERT INTO person (first_name,last_name,age,is_active) VALUES('prenom17' , 'nom
 INSERT INTO person (first_name,last_name,age,is_active) VALUES('prenom18' , 'nom18' , 33 , true);
 INSERT INTO person (first_name,last_name,age,is_active) VALUES('prenom19' , 'nom19' , 33 , true);
 INSERT INTO person (first_name,last_name,age,is_active) VALUES('prenom20' , 'nom20' , 33 , true);
+
+INSERT INTO functions (id,function,salary) VALUES(1 , 'developper' , 2500.0);
+INSERT INTO functions (id,function,salary) VALUES(2 , 'accountant' , 2400.0);
+INSERT INTO functions (id,function,salary) VALUES(3 , 'sales agent' , 2200.0);
+INSERT INTO functions (id,function,salary) VALUES(4 , 'director' , 4400.0);
+INSERT INTO functions (id,function,salary) VALUES(5 , 'manager' , 2400.0);
+INSERT INTO functions (id,function,salary) VALUES(6 , 'worker' , 2100.0);
+INSERT INTO functions (id,function,salary) VALUES(7 , 'developper' , 2600.0);
+INSERT INTO functions (id,function,salary) VALUES(8 , 'worker' , 2300.0);
+INSERT INTO functions (id,function,salary) VALUES(9 , 'developper' , 2800.0);
+INSERT INTO functions (id,function,salary) VALUES(10 , 'worker' , 2200.0);
+INSERT INTO functions (id,function,salary) VALUES(11 , 'developper' , 2550.0);
+INSERT INTO functions (id,function,salary) VALUES(12 , 'accountant' , 2700.0);
+INSERT INTO functions (id,function,salary) VALUES(13 , 'sales agent' , 2800.0);
+INSERT INTO functions (id,function,salary) VALUES(14 , 'director' , 5400.0);
+INSERT INTO functions (id,function,salary) VALUES(15 , 'manager' , 3400.0);
+INSERT INTO functions (id,function,salary) VALUES(16 , 'worker' , 2310.0);
+INSERT INTO functions (id,function,salary) VALUES(17 , 'developper' , 2580.0);
+INSERT INTO functions (id,function,salary) VALUES(18 , 'worker' , 2370.0);
+INSERT INTO functions (id,function,salary) VALUES(19 , 'developper' , 2900.0);
+INSERT INTO functions (id,function,salary) VALUES(20 , 'worker' , 2080.0);

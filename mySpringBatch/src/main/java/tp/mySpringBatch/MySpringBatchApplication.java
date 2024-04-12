@@ -60,7 +60,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	 */
 
 	  //Job job = (Job) applicationContext.getBean("myHelloWorldJob");
-	  Job job = (Job) applicationContext.getBean("myHelloWorldWithParameterJob");
+	  //Job job = (Job) applicationContext.getBean("myHelloWorldWithParameterJob");
       //Job job = (Job) applicationContext.getBean("copyFromCsvToCsvJob");
 	  //Job job = (Job) applicationContext.getBean("fromFixedPosTxtToCsvJob");
       // Job job = (Job) applicationContext.getBean("fromCsvToXmlJob");
@@ -75,11 +75,14 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	  //Job job  = (Job) applicationContext.getBean("mySimpleSequentialStepsJob");
 	  //Job job  = (Job) applicationContext.getBean("mySimpleConditionalStepsJob");
 	  //Job job  = (Job) applicationContext.getBean("myPartitionJob");
+	  
+	  Job job = (Job) applicationContext.getBean("generateDbDataSetJob");
 
     JobParameters jobParameters = new JobParametersBuilder()
         .addLong("timeStampOfJobInstance", System.currentTimeMillis())//Necessary for running several instances of a same job (each jobInstance must have a parameter that changes)
         .addString("msg1", "_my_msg1_value_")//used by PrintJobParamMessageTaskletBean and some Reader/Writer
         .addString("enableUpperCase", "true")//used by SimpleUppercasePersonProcessor
+        .addLong("dataSetSize", 200L) //used by generateDbDataSetJob
         .toJobParameters();
 
     var jobExecution = jobLauncher.run(job, jobParameters);

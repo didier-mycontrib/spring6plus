@@ -19,7 +19,7 @@ public class SimpleUppercasePersonProcessor implements ItemProcessor<Person,Pers
 	@Override
 	public Person process(Person pers) throws Exception {
 		String lastName = enableUpperCase?pers.getLastName().toUpperCase():pers.getLastName();
-		Person person=new Person(pers.getFirstName(),lastName,pers.getAge(),pers.getActive());
+		Person person=new Person(pers.getId(),pers.getFirstName(),lastName,pers.getAge(),pers.getActive());
 		return person;
 	}
 }

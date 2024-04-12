@@ -55,5 +55,14 @@ public class MyDbPersonWriterConfig {
 		  .sql(INSERT_QUERY)
 		  .build();
 	  }
+	 
+	 @Bean @Qualifier("generate_db")
+	  public JdbcBatchItemWriter<Person> genJdbcItemWriter(@Qualifier("inputdb") DataSource outputdbDataSource) {
+		 return new JdbcBatchItemWriterBuilder<Person>()
+		  .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Person>())
+		  .dataSource(outputdbDataSource)
+		  .sql(INSERT_QUERY)
+		  .build();
+	  }
 	
 }

@@ -14,12 +14,12 @@
     <property name="resource" value="file:data/output/txt/fixedPositionOutputData.txt" />
     <property name="lineAggregator">
         <bean class="org.springframework.batch.item.file.transform.FormatterLineAggregator">
-             <property name = "minimumLength" value = "58" />
-             <property name = "maximumLength" value = "58" />
-             <property name = "format" value = "%-24s%-24s%-4d%-6b" />
+             <property name = "minimumLength" value = "66" />
+             <property name = "maximumLength" value = "66" />
+             <property name = "format" value = "%-8d%-24s%-24s%-4d%-6b" />
              <property name="fieldExtractor">
                    <bean class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
-                          <property name = "names" value="firstName,lastName,age,active" />			                      
+                          <property name = "names" value="id,firstName,lastName,age,active" />			                      
                     </bean>
              </property>
         </bean>

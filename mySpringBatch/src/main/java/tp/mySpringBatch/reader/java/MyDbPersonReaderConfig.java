@@ -23,7 +23,7 @@ import tp.mySpringBatch.model.Person;
 @Profile("!xmlJobConfig")
 public class MyDbPersonReaderConfig {
 	
-	private static final String SELECT_QUERY = "select first_name, last_name, age, is_active from person"	;
+	private static final String SELECT_QUERY = "select id, first_name, last_name, age, is_active from person"	;
 	
 	 //with builder:
 	 @Bean @Qualifier("db")
@@ -42,10 +42,10 @@ public class MyDbPersonReaderConfig {
 		 
 		     SqlPagingQueryProviderFactoryBean pagingQueryProviderFactory = new SqlPagingQueryProviderFactoryBean();
 		     pagingQueryProviderFactory.setDataSource(inputdbDataSource);
-		     pagingQueryProviderFactory.setFromClause("select person_id, first_name, last_name, age, is_active");
+		     pagingQueryProviderFactory.setFromClause("select id, first_name, last_name, age, is_active");
 		     pagingQueryProviderFactory.setFromClause("from person");
-		     pagingQueryProviderFactory.setWhereClause("where person_id &gt;= :fromId and person_id &lt;= :toId");
-		     pagingQueryProviderFactory.setSortKey("person_id");
+		     pagingQueryProviderFactory.setWhereClause("where id &gt;= :fromId and id &lt;= :toId");
+		     pagingQueryProviderFactory.setSortKey("id");
 		     PagingQueryProvider pagingQueryProvider = pagingQueryProviderFactory.getObject();
 		    		 
 		     Map<String,Object> parameterValues = new HashMap<>();

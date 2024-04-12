@@ -24,7 +24,7 @@
             <property name = "lineTokenizer"> 
                <bean    
                   class = "org.springframework.batch.item.file.transform.DelimitedLineTokenizer"> 
-                  <property name = "names" value="firstName,lastName,age,active">
+                  <property name = "names" value="id,firstName,lastName,age,active">
                   </property>
                   <property name = "delimiter" value = ";" />
                </bean> 
@@ -48,7 +48,7 @@
             <property name = "lineTokenizer"> 
                <bean    
                   class = "org.springframework.batch.item.file.transform.DelimitedLineTokenizer"> 
-                  <property name = "names" value="firstName,lastName,age,active">
+                  <property name = "names" value="id,firstName,lastName,age,active">
                   </property>
                   <property name = "delimiter" value = ";" />
                </bean> 

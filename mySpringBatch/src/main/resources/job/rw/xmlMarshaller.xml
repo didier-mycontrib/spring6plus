@@ -31,6 +31,7 @@
       </property> 
     <property name="aliases">
         <util:map>
+            <entry key="id" value="java.lang.Long" />
             <entry key="person"
                    value="tp.mySpringBatch.model.Person" />
             <entry key="firstName" value="java.lang.String" />

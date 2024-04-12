@@ -30,8 +30,8 @@ public class MyCsvFilePersonWriterWithPartitionConfig {
 				  .resource(outputPartitionCsvResource)
 				  .delimited()
 				  .delimiter(";")
-				  .names("firstName", "lastName", "age", "active")
-				  .headerCallback((writer)-> {writer.write("firstname;lastname;age;active");})
+				  .names("id","firstName", "lastName", "age", "active")
+				  .headerCallback((writer)-> {writer.write("id;firstname;lastname;age;active");})
 				  .build();
 	  }
 	  

@@ -29,8 +29,8 @@ public class MyFixedPosTextFilePersonReaderConfig {
 				.resource(inputTxtResource)
 				.targetType(Person.class)
 				.fixedLength()
-				.columns(new Range(1, 24), new Range(25, 48), new Range(49, 52), new Range(53, 58))
-				.names("firstName", "lastName", "age", "active")
+				.columns(new Range(1, 8),new Range(9, 32), new Range(33, 56), new Range(57, 60), new Range(61, 66))
+				.names("id","firstName", "lastName", "age", "active")
 				.build();
 	  }
 
@@ -70,10 +70,7 @@ public class MyFixedPosTextFilePersonReaderConfig {
 	    var tokenizer = new FixedLengthTokenizer();
 
 		tokenizer.setNames("firstName", "lastName", "age", "active");
-		tokenizer.setColumns(new Range(1, 24),
-							new Range(25, 48),
-							new Range(49, 52),
-							new Range(53, 58));
+		tokenizer.setColumns(new Range(1, 8),new Range(9, 32), new Range(33, 56), new Range(57, 60), new Range(61, 66));
 		return tokenizer;
 	  }
 */

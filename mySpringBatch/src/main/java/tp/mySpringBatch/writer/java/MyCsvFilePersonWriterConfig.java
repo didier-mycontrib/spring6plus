@@ -29,8 +29,8 @@ public class MyCsvFilePersonWriterConfig {
 				  .resource(outputCsvResource)
 				  .delimited()
 				  .delimiter(";")
-				  .names("firstName", "lastName", "age", "active")
-				  .headerCallback((writer)-> {writer.write("firstname;lastname;age;active");})
+				  .names("id","firstName", "lastName", "age", "active")
+				  .headerCallback((writer)-> {writer.write("id;firstname;lastname;age;active");})
 				  .build();
 	  }
 	  
@@ -58,7 +58,7 @@ public class MyCsvFilePersonWriterConfig {
 	  
 	  FieldExtractor<Person> personFieldExtractor(){
 		  BeanWrapperFieldExtractor<Person> beanWrapperFieldExtractor = new BeanWrapperFieldExtractor<>();
-		  beanWrapperFieldExtractor.setNames(new String[]{"firstName", "lastName", "age", "active"});
+		  beanWrapperFieldExtractor.setNames(new String[]{"id","firstName", "lastName", "age", "active"});
 	      return beanWrapperFieldExtractor;
 	  }
 	  

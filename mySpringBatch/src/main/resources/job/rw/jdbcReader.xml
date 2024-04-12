@@ -16,7 +16,7 @@ le inputdbDataSource provient actuellement de la configuration java
 
 <bean id="jdbcPersonReader" class="org.springframework.batch.item.database.JdbcCursorItemReader">
     <property name="dataSource" ref="inputdbDataSource" /> <!-- from java config -->
-    <property name="sql" value="select first_name, last_name, age, is_active from person" />
+    <property name="sql" value="select id,first_name, last_name, age, is_active from person" />
     <property name="rowMapper" >
        <bean class="tp.mySpringBatch.db.PersonRowMapper">
        </bean>
@@ -29,10 +29,10 @@ class="org.springframework.batch.item.database.JdbcPagingItemReader">
     <property name="queryProvider">
 	  <bean class="org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean">
 		<property name="dataSource" ref="inputdbDataSource" />
-		<property name="selectClause" value="select person_id, first_name, last_name, age, is_active" />
+		<property name="selectClause" value="select id, first_name, last_name, age, is_active" />
 		<property name="fromClause" value="from person" />
-		<property name="whereClause" value="where person_id &gt;= :fromId and person_id &lt;= :toId" />
-		<property name="sortKey" value="person_id" />
+		<property name="whereClause" value="where id &gt;= :fromId and id &lt;= :toId" />
+		<property name="sortKey" value="id" />
 	  </bean>
 	</property>
     <property name="parameterValues">

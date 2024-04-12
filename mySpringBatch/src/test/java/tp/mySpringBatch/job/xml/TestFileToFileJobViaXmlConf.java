@@ -24,16 +24,16 @@ public class TestFileToFileJobViaXmlConf extends AbstractBasicTestJob {
 	}
 	
 	public TestFileToFileJobViaXmlConf() {
-		/*super("copyFromCsvToCsvJob",
+		super("copyFromCsvToCsvJob",
 				"fromFixedPosTxtToCsvJob",
 				"fromCsvToXmlJob",
 				"fromCsvToJsonJob",
 				"fromCsvToFixedPosTxtJob",
 				"fromXmlToCsvJob",
 				"fromJsonToXmlJob"); // jobNames to test
-		*/
+		
 		//super("fromCsvWithSkipsErrorsToJsonJob");
-		super("fromCsvToJsonWithRetryJob");
+		//super("fromCsvToJsonWithRetryJob");
 		//super("copyFromCsvToCsvJob");
 	}
 }

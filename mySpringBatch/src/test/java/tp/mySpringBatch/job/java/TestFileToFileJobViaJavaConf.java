@@ -40,15 +40,14 @@ public class TestFileToFileJobViaJavaConf extends AbstractBasicTestJob {
 	}
 	
 	public TestFileToFileJobViaJavaConf() {
-		/*super("copyFromCsvToCsvJob",
+		super("copyFromCsvToCsvJob",
 		"fromFixedPosTxtToCsvJob",
 		"fromCsvToXmlJob",
 		"fromCsvToJsonJob",
 		"fromCsvToFixedPosTxtJob",
 		"fromXmlToCsvJob",
 		"fromJsonToXmlJob"); // jobNames to test
-       */
-		super(/*"fromCsvWithSkipsErrorsToJsonJob"*/);
+		//super(/*"fromCsvWithSkipsErrorsToJsonJob"*/);
 		//super("fromCsvToJsonWithRetryJob"); //WITH BUG !!!!
 	}
 	

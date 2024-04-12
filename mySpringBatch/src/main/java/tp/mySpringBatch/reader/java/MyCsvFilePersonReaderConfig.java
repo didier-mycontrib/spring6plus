@@ -46,7 +46,7 @@ public class MyCsvFilePersonReaderConfig {
 				.linesToSkip(1)
 				.delimited()
 				.delimiter(";")
-				.names("firstName", "lastName", "age", "active")
+				.names("id","firstName", "lastName", "age", "active")
 				.targetType(Person.class)
 				.build();
 	  }
@@ -62,7 +62,7 @@ public class MyCsvFilePersonReaderConfig {
 				.linesToSkip(1)
 				.delimited()
 				.delimiter(";")
-				.names("firstName", "lastName", "age", "active")
+				.names("id","firstName", "lastName", "age", "active")
 				.targetType(Person.class)
 				.build();
 	  }
@@ -106,7 +106,7 @@ public class MyCsvFilePersonReaderConfig {
 	  public DelimitedLineTokenizer personLineTokenizer() {
 	    var tokenizer = new DelimitedLineTokenizer();
 	    tokenizer.setDelimiter(";");
-	    tokenizer.setNames("firstName", "lastName", "age", "active");
+	    tokenizer.setNames("id","firstName", "lastName", "age", "active");
 	    return tokenizer;
 	  }
       */

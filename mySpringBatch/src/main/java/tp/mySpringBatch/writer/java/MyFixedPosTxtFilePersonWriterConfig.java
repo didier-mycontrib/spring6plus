@@ -27,10 +27,10 @@ public class MyFixedPosTxtFilePersonWriterConfig {
 				  .name("fixedPosTxtFilePersonWriter")
 				  .resource(outputTxtResource)
 				  .formatted()
-				  .maximumLength(58)
-				  .minimumLength(58)
-				  .format("%-24s%-24s%-4d%-6b")
-				  .names("firstName", "lastName", "age", "active")
+				  .maximumLength(66)
+				  .minimumLength(66)
+				  .format("%-8d%-24s%-24s%-4d%-6b")
+				  .names("id","firstName", "lastName", "age", "active")
 				  .build();
 	  }
 	  
@@ -63,9 +63,9 @@ public class MyFixedPosTxtFilePersonWriterConfig {
 	  FormatterLineAggregator<Person> personLineAggregator(FieldExtractor<Person> personFieldExtractor){
 	
 		  FormatterLineAggregator<Person> formatterLineAggregator = new FormatterLineAggregator<>();
-		  formatterLineAggregator.setMinimumLength(58);
-		  formatterLineAggregator.setMaximumLength(58);
-		  formatterLineAggregator.setFormat("%-24s%-24s%-4d%-6b");
+		  formatterLineAggregator.setMinimumLength(66);
+		  formatterLineAggregator.setMaximumLength(66);
+		  formatterLineAggregator.setFormat("%-8d%-24s%-24s%-4d%-6b");
 		  formatterLineAggregator.setFieldExtractor(personFieldExtractor);
 	      return formatterLineAggregator;
 	  }

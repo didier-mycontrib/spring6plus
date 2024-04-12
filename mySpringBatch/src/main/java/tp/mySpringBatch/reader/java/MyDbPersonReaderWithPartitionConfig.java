@@ -34,10 +34,10 @@ public class MyDbPersonReaderWithPartitionConfig {
 		 
 		     SqlPagingQueryProviderFactoryBean pagingQueryProviderFactory = new SqlPagingQueryProviderFactoryBean();
 		     pagingQueryProviderFactory.setDataSource(inputdbDataSource);
-		     pagingQueryProviderFactory.setSelectClause("select person_id, first_name, last_name, age, is_active");
+		     pagingQueryProviderFactory.setSelectClause("select id, first_name, last_name, age, is_active");
 		     pagingQueryProviderFactory.setFromClause("from person");
-		     pagingQueryProviderFactory.setWhereClause("where person_id >= :fromId and person_id <= :toId");
-		     pagingQueryProviderFactory.setSortKey("person_id");
+		     pagingQueryProviderFactory.setWhereClause("where id >= :fromId and id <= :toId");
+		     pagingQueryProviderFactory.setSortKey("id");
 		     PagingQueryProvider pagingQueryProvider = pagingQueryProviderFactory.getObject();
 		    		 
 		     Map<String,Object> parameterValues = new HashMap<>();

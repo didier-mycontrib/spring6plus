@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 
 import tp.mySpringBatch.model.Person;
+import tp.mySpringBatch.model.PersonWithNumAndAddress;
+import tp.mySpringBatch.reader.mapper.PersonWithNumAndAddressLineMapper;
 
 @Configuration
 @Profile("!xmlJobConfig")
@@ -23,6 +25,9 @@ public class MyCsvFilePersonReaderConfig {
 	@Value("file:data/input/csv/inputData.csv") //to read in project root directory
 	  //NB: by default @Value(path) is @Value("classpath:path) //to read in src/main/resource or other classpath part
 	  private Resource inputCsvResource;
+	
+	@Value("file:data/input/csv/personWithNumAndAddress.csv") //to read in project root directory
+	  private Resource inputCsvWithNumAndAddressResource;
 	
 	@Value("file:data/input/csv/inputDataWithErrors.csv") //to read in project root directory
 	  private Resource inputCsvWithErrorsResource;
@@ -51,15 +56,30 @@ public class MyCsvFilePersonReaderConfig {
 				.build();
 	  }
 	  
+	  @Bean @Qualifier("csv")
+	  @JobScope
+	  public FlatFileItemReader<PersonWithNumAndAddress> personCsvWithNumAndAddressFileReader() {
+		  
+		var specificComplexLineMapper = new PersonWithNumAndAddressLineMapper();
+		
+		return new FlatFileItemReaderBuilder<PersonWithNumAndAddress>()
+				.name("personCsvWithNumAndAddressFileReader")
+				.resource(inputCsvWithNumAndAddressResource)
+				.linesToSkip(1)
+				.lineMapper(specificComplexLineMapper)
+				.build();
+	  }
+	  
 	  @Bean @Qualifier("csvWithErrors")
 	  @JobScope
 	  public FlatFileItemReader<Person> personCsvWithErrorsFileReader() {
+		 
 		  
-	
 		return new FlatFileItemReaderBuilder<Person>()
 				.name("personCsvWithErrorsFileReader")
 				.resource(inputCsvWithErrorsResource)
 				.linesToSkip(1)
+				.lineMapper(null)
 				.delimited()
 				.delimiter(";")
 				.names("id","firstName", "lastName", "age", "active")

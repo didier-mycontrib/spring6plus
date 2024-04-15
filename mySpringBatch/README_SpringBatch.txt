@@ -18,6 +18,14 @@ default beanName = methodName (prefixed by @Bean) or classNameWithFirstCharLower
 ----------
 Multiple @Qualifier may be used . ex: @qualifier("csv") @Qualifier("person")
 
+==================
+fichiers plats hybrides :
+c'est un fichier .csv dont certaines parties (délimitées par ";")
+sont elles mêmes décompables en
+   - sous sous parties éventuellement délimitées par un autres delimiteur (ex: !")
+   ou bien
+   - sous sous parties sont à analyser en position fixe (ex: code pays sur 2ou3 caractères , codePostal sur 12 caractères , ville sur 24 caractères , numero et rue sur 32 caractères)
+
 ====================
 URL/liens WEB sur SpringBatch:
 

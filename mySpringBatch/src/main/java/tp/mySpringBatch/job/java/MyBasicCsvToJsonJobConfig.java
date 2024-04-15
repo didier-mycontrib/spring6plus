@@ -13,12 +13,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 
 import tp.mySpringBatch.exception.MyProcessException;
 import tp.mySpringBatch.listener.JobCompletionNotificationListener;
 import tp.mySpringBatch.listener.MySkippedErrorsListener;
 import tp.mySpringBatch.model.Person;
+import tp.mySpringBatch.model.PersonWithNumAndAddress;
 import tp.mySpringBatch.processor.SimpleUppercasePersonProcessor;
 import tp.mySpringBatch.processor.UppercasePersonProcessorWithFailuresForRetry;
 
@@ -48,6 +48,28 @@ public class MyBasicCsvToJsonJobConfig extends MyAbstractJobConfig{
         .<Person, Person>chunk(5, batchTxManager)
         .reader(personItemReader)
         .processor(simpleUppercasePersonProcessor)
+        .writer(personItemWriter)
+        .build();
+  }
+  
+  @Bean
+  public Job fromCsvWithNumAndAddressToJsonJob(@Qualifier("csvWithNumAndAddressToJson") Step step1) {
+    var name = "fromCsvWithNumAndAddressToJsonJob";//same as method name for simple mind developper
+    var jobBuilder = new JobBuilder(name, jobRepository);
+    return jobBuilder.start(step1)
+    		.listener(new JobCompletionNotificationListener())
+    		.build();
+  }
+
+  
+  @Bean @Qualifier("csvWithNumAndAddressToJson")
+  public Step stepCsvWithNumAndAddressToJson(@Qualifier("csv") ItemReader<PersonWithNumAndAddress> personItemReader,
+		            @Qualifier("json") ItemWriter<PersonWithNumAndAddress> personItemWriter ) {
+    var name = "stepCsvWithNumAndAddressToJson";//same as method name for simple mind developper
+    var stepBuilder = new StepBuilder(name, jobRepository);
+    return stepBuilder
+        .<PersonWithNumAndAddress, PersonWithNumAndAddress>chunk(5, batchTxManager)
+        .reader(personItemReader)
         .writer(personItemWriter)
         .build();
   }

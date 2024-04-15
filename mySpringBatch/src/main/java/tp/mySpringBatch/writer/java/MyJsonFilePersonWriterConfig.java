@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.WritableResource;
 
 import tp.mySpringBatch.model.Person;
+import tp.mySpringBatch.model.PersonWithNumAndAddress;
 
 @Configuration
 @Profile("!xmlJobConfig")
@@ -21,6 +22,8 @@ public class MyJsonFilePersonWriterConfig {
 	  //NB: by default @Value(path) is @Value("classpath:path) //to read in src/main/resource or other classpath part
 	  private WritableResource outputJsonResource;
 	 
+	  @Value("file:data/output/json/personWithNumberAndAddress.json") //to read in project root directory
+	  private WritableResource personWithNumAndAddressOutputJsonResource;
 	  
 	  //avec builder:
 	  @Bean @Qualifier("json")
@@ -29,6 +32,15 @@ public class MyJsonFilePersonWriterConfig {
 				     .name("personJsonFileItemWriter")
 	                 .jsonObjectMarshaller(new JacksonJsonObjectMarshaller<>())
 	                 .resource(outputJsonResource)
+	                 .build();
+		}
+	  
+	  @Bean @Qualifier("json")
+	  ItemWriter<PersonWithNumAndAddress> personWithNumAndAddressJsonFileItemWriter() {		  
+		  return new JsonFileItemWriterBuilder<PersonWithNumAndAddress>()
+				     .name("personWithNumAndAddressJsonFileItemWriter")
+	                 .jsonObjectMarshaller(new JacksonJsonObjectMarshaller<>())
+	                 .resource(personWithNumAndAddressOutputJsonResource)
 	                 .build();
 		}
 }

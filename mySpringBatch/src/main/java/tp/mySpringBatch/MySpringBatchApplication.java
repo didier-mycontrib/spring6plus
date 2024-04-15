@@ -77,7 +77,8 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	  //Job job  = (Job) applicationContext.getBean("myPartitionJob");
 	  
 	 // Job job = (Job) applicationContext.getBean("generateDbDataSetJob");
-	  Job job = (Job) applicationContext.getBean("increaseEmployeeSalaryJob");
+	 // Job job = (Job) applicationContext.getBean("increaseEmployeeSalaryJob");
+	  Job job = (Job) applicationContext.getBean("fromCsvWithNumAndAddressToJsonJob");
 
     JobParameters jobParameters = new JobParametersBuilder()
         .addLong("timeStampOfJobInstance", System.currentTimeMillis())//Necessary for running several instances of a same job (each jobInstance must have a parameter that changes)

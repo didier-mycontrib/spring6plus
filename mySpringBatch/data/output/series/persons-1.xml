@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><persons><person><active>true</active><age>36</age><firstName>Jean</firstName><id>1</id><lastName>BONO</lastName></person><person><active>false</active><age>44</age><firstName>Alain</firstName><id>2</id><lastName>THERIEUR</lastName></person></persons>

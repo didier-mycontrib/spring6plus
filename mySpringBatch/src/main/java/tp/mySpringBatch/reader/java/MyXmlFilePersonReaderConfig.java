@@ -40,7 +40,7 @@ public class MyXmlFilePersonReaderConfig {
 		*/
 	 
 	 //V2 with builder:
-	 @Bean @Qualifier("xml")
+	 @Bean(destroyMethod="") @Qualifier("xml")
 	  ItemReader<Person> personXmlFileItemReader() {
 
 		 var personXmlMarshaller = new Jaxb2Marshaller();

@@ -3,6 +3,7 @@ package tp.mySpringBatch.reader.java;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.configuration.annotation.JobScope;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
 import tp.mySpringBatch.model.Person;
@@ -18,7 +20,7 @@ import tp.mySpringBatch.reader.mapper.PersonWithNumAndAddressLineMapper;
 
 @Configuration
 @Profile("!xmlJobConfig")
-public class MyCsvFilePersonReaderConfig {
+public class MyCsvFilePersonReaderConfig { 
 	
 	public static final Logger logger = LoggerFactory.getLogger(MyCsvFilePersonReaderConfig.class);
 	
@@ -69,6 +71,27 @@ public class MyCsvFilePersonReaderConfig {
 				.lineMapper(specificComplexLineMapper)
 				.build();
 	  }
+	 
+	  @Bean @Qualifier("csv-serie")
+	  @StepScope
+	  public FlatFileItemReader<Person> personSerieCsvFileReader(
+			  @Value("#{stepExecutionContext[sIndex]}") Integer sIndex
+			  ) {
+		System.out.println("RRRR personSerieCsvFileReader: sIndex="+sIndex);
+		if(sIndex==null) sIndex=1;  
+		Resource inputPersonSerieCsvResource = new FileSystemResource("data/input/series/persons-" + sIndex + ".csv");
+		  
+		return new FlatFileItemReaderBuilder<Person>()
+				.name("personSerieCsvFileReader")
+				.resource(inputPersonSerieCsvResource)
+				.linesToSkip(1)
+				.delimited()
+				.delimiter(";")
+				.names("id","firstName", "lastName", "age", "active")
+				.targetType(Person.class)
+				.build();
+	  }
+	 
 	  
 	  @Bean @Qualifier("csvWithErrors")
 	  @JobScope

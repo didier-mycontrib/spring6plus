@@ -1,5 +1,6 @@
 package tp.mySpringBatch.writer.java;
 
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.WritableResource;
 
 import tp.mySpringBatch.model.EmployeeStat;
@@ -22,7 +24,7 @@ public class MyCsvFilePersonWriterConfig {
 	  @Value("file:data/output/csv/employeeStats.csv") //to read in project root directory
 	  private WritableResource empStatsCsvResource;
 	  
-	 
+	  
 	  //V2 with builder:
 	  @Bean @Qualifier("csv")
 	  FlatFileItemWriter<Person> csvFilePersonWriter() {
@@ -30,6 +32,28 @@ public class MyCsvFilePersonWriterConfig {
 		  return new FlatFileItemWriterBuilder<Person>()
 				  .name("csvFilePersonWriter")
 				  .resource(outputCsvResource)
+				  .delimited()
+				  .delimiter(";")
+				  .names("id","firstName", "lastName", "age", "active")
+				  .headerCallback((writer)-> {writer.write("id;firstname;lastname;age;active");})
+				  .build();
+	  }
+	  
+	//V2 with builder:
+	  @Bean @Qualifier("csv-serie")
+	  @StepScope
+	  FlatFileItemWriter<Person> csvFilePersonSerieWriter(
+			  @Value("#{stepExecutionContext[sIndex]}") Integer sIndex
+                ) {
+		System.out.println("WWWW csvFilePersonSerieWriter: sIndex="+sIndex);
+		if(sIndex==null) sIndex=1; 
+		WritableResource outputPersonSerieCsvResource = new FileSystemResource("data/output/series/persons-" + sIndex + ".csv");
+		return new FlatFileItemWriterBuilder<Person>()
+				  .name("csvFilePersonWriter")
+				  .resource(outputPersonSerieCsvResource)
+				  .shouldDeleteIfEmpty(true)
+				  .shouldDeleteIfExists(true)
+				  .forceSync(true)
 				  .delimited()
 				  .delimiter(";")
 				  .names("id","firstName", "lastName", "age", "active")

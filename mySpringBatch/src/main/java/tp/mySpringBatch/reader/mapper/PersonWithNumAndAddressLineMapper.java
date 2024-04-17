@@ -61,7 +61,7 @@ public class PersonWithNumAndAddressLineMapper implements LineMapper<PersonWithN
 		personWithNumAndAddress.setAge(mainFieldSet.readInt("age"));
 		personWithNumAndAddress.setActive(mainFieldSet.readBoolean("active"));
 	
-		logger.debug(">>>> via PersonWithNumAndAddressLineMapper , personWithNumAndAddress=" + personWithNumAndAddress );
+		//logger.debug(">>>> via PersonWithNumAndAddressLineMapper , personWithNumAndAddress=" + personWithNumAndAddress );
 		
 		return personWithNumAndAddress;
 	}

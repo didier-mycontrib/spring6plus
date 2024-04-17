@@ -22,7 +22,7 @@ public class MyJsonFilePersonReaderConfig {
 	 
 	 
 	 //with builder:
-	 @Bean @Qualifier("json")
+	 @Bean(destroyMethod="") @Qualifier("json")
 	  ItemReader<Person> personJsonFileItemReader() {
 		 return new JsonItemReaderBuilder<Person>()
 				 .name("personJsonFileItemReader")

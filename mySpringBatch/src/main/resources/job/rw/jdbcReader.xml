@@ -23,9 +23,10 @@ le inputdbDataSource provient actuellement de la configuration java
     </property>
 </bean>     
 
+ 
 <bean id="jdbcPartitionPersonReader" scope="step"
 class="org.springframework.batch.item.database.JdbcPagingItemReader">
-    <property name="dataSource" ref="inputdbDataSource" /> <!-- from java config -->
+    <property name="dataSource" ref="inputdbDataSource" />
     <property name="queryProvider">
 	  <bean class="org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean">
 		<property name="dataSource" ref="inputdbDataSource" />

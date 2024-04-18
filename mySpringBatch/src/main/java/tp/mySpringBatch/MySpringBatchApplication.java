@@ -38,8 +38,8 @@ public class MySpringBatchApplication implements CommandLineRunner {
 		if(profilsActifs!=null) { 
 			System.out.println("spring.profiles.active="+profilsActifs);
 		}else {
-			//String defaultProfils  = "xmlJobConfig";
-			String defaultProfils  = "";
+			String defaultProfils  = "xmlJobConfig";
+			//String defaultProfils  = "";
 			System.setProperty("spring.profiles.default", defaultProfils);
 			System.out.println("spring.profiles.default="+defaultProfils);
 		}
@@ -64,7 +64,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	  if(launchRunAfterMain) {
 		 initDefaultJobName();
 	     runAfterMain(args);
-	     reRunAfterMain(args);
+	     //reRunAfterMain(args);
 	  }
   }
   
@@ -73,7 +73,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
   }
   
   public void initDefaultJobName() {
-	  //this.defaultJobName = "myHelloWorldJob";
+	  this.defaultJobName = "myHelloWorldJob";
 	  //this.defaultJobName = "myHelloWorldWithParameterJob";
       //this.defaultJobName = "copyFromCsvToCsvJob";
 	  //this.defaultJobName = "fromFixedPosTxtToCsvJob";
@@ -82,7 +82,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	  //this.defaultJobName = "fromCsvToFixedPosTxtJob";
 	  //this.defaultJobName = "fromXmlToCsvJob";
 	  //this.defaultJobName = "fromJsonToXmlJob";
-      //this.defaultJobName = "insertIntoDbFromCsvJob";
+     // this.defaultJobName = "insertIntoDbFromCsvJob";
 	  //this.defaultJobName = "insertIntoCsvFromDbJob";
 	  //this.defaultJobName = "withMyTaskletJob";
 	  //this.defaultJobName = "mySimpleSequentialStepsJob";
@@ -91,7 +91,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	  //this.defaultJobName = "generateDbDataSetJob";
 	  //this.defaultJobName = "increaseEmployeeSalaryJob";
 	  //this.defaultJobName = "fromCsvWithNumAndAddressToJsonJob";
-	  this.defaultJobName = "fromPersonSerieCsvToXmlJob";
+	  //this.defaultJobName = "fromPersonSerieCsvToXmlJob";
 	  //this.defaultJobName = "simpleCounterRestartableJob";
   }
   

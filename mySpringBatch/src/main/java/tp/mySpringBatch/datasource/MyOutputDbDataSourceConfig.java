@@ -29,7 +29,7 @@ public class MyOutputDbDataSourceConfig {
   }
 	
 	@Bean(name="outputdbDataSource") @Qualifier("outputdb")
-	@BatchDataSource
+	//@BatchDataSource
 	public DataSource outputdbDataSource(@Qualifier("outputdb") DataSourceProperties outputdbDataSourceProperties) {
 	    return outputdbDataSourceProperties
 	      .initializeDataSourceBuilder()

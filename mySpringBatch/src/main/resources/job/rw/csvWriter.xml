@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:batch="http://www.springframework.org/schema/batch"
 	xsi:schemaLocation="http://www.springframework.org/schema/batch
 	https://www.springframework.org/schema/batch/spring-batch.xsd
 	http://www.springframework.org/schema/beans 
@@ -34,7 +35,7 @@
     amelioration possible (en trouvant un equivalent xml ):
      .headerCallback((writer)-> {writer.write("firstname;lastname;age;active");})
      -->
-           
+       
  <bean id="csvFilePartitionPersonWriter" scope="step" 
      class="org.springframework.batch.item.file.FlatFileItemWriter">
     <property name="resource" value="file:data/output/csv/outputData_#{stepExecutionContext[fromId]}-#{stepExecutionContext[toId]}.csv" />
@@ -49,7 +50,7 @@
              </property>
         </bean>
     </property>
-</bean>
+</bean>  
  
    
  </beans>

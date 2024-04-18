@@ -15,7 +15,7 @@ public abstract class MyAbstractJobConfig {
 	@Autowired
 	protected JobRepository jobRepository;
 	
-	@Autowired @Qualifier("batch")
+	@Autowired /*@Qualifier("batch")*/
 	protected PlatformTransactionManager batchTxManager;
 	
 	//NB:  jobRepository will be useful in Job concrete SubClass to build new Job and new Steps

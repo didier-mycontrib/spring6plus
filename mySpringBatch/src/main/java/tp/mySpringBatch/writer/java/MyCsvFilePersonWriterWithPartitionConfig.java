@@ -15,7 +15,6 @@ import tp.mySpringBatch.model.Person;
 
 @Configuration
 @Profile("!xmlJobConfig")
-
 public class MyCsvFilePersonWriterWithPartitionConfig {
 	  
 	  @Bean @StepScope @Qualifier("csv_withPartition")

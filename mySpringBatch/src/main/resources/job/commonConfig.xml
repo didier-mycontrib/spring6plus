@@ -6,7 +6,7 @@
 	http://www.springframework.org/schema/beans 
 	https://www.springframework.org/schema/beans/spring-beans.xsd">
                                 
-   <alias name="batchTransactionManager" alias="transactionManager" />
+   <!--  <alias name="batchTransactionManager" alias="transactionManager" /> -->
    
    <bean name="jobCompletionNotificationListener" class="tp.mySpringBatch.listener.JobCompletionNotificationListener" />
    

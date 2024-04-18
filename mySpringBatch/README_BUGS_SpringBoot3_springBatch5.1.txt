@@ -1,13 +1,24 @@
 Petits problèmes à peaufiner:
 -----------------------------
    
-* spring.batch.jdbc.initialize-schema=always pas bien pris en compte
-
 * #temp workaround for step scope in job xml config file
 spring.main.allow-bean-definition-overriding=true
+
+* ...
    
 =====================
 Problèmes résolus: 
+
+  * spring.batch.jdbc.initialize-schema=always pas bien pris en compte
+  --> Solution :
+    Surtout pas de @EnableBatchProcessing(dataSourceRef = "batchDataSource" ,
+                       transactionManagerRef = "batchTransactionManager")
+    Mais simplement préciser le datasource principal à utiliser par springBatch intégré à springBoot
+    via 
+    @Primary
+	 @BatchDataSource
+	 @Bean(value = "dataSource") ...
+	 et grâce à cette bonne config , spring.batch.jdbc.initialize-schema=always est bien pris en compte
 
   * erreurs au redémarrage de fromPersonSerieCsvToXmlJob:
    - pas de bonne ré-execution de lecture csv et suite , erreur not-writable  person-2.csv ou .xml

@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class MyInputDbDataSourceConfig {
@@ -18,18 +19,19 @@ public class MyInputDbDataSourceConfig {
 	 and spring.inputdb.datasource.username=sa
         spring.inputdb.datasource.password=
 	 */
-	@Bean @Qualifier("inputdb")
+ @Bean @Qualifier("inputdb")
  @ConfigurationProperties("spring.inputdb.datasource")
  public DataSourceProperties inputdbDataSourceProperties() {
      return new DataSourceProperties();
  }
 	
 	@Bean(name="inputdbDataSource") @Qualifier("inputdb")
-	@BatchDataSource
+	//@BatchDataSource
 	public DataSource inputdbDataSource(@Qualifier("inputdb") DataSourceProperties inputdbDataSourceProperties) {
 	    return inputdbDataSourceProperties
 	      .initializeDataSourceBuilder()
 	      .build();
 	}
 	
+
 }

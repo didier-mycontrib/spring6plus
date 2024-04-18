@@ -24,11 +24,18 @@ import org.springframework.transaction.PlatformTransactionManager;
  * Minimum Batch config = using a in-memory jdbc database like h2
  */
 
+/*
+ * NB: Cette ancienne classe de configuration est maintenant désactivée (@Configuration en commentaire)
+ * (qui fonctionne à peu près en lancant le DataSourceInitializer databasePopulator()
+ * qu'au premier démarrage) correspond à une configuration explicite de SpringBatch
+ * en court-circuitant les mécanismes par défaut de spring-boot-starter-batch).
+ * NB: @EnableBatchProcessing n'est normalement utile que sans spring-boot-starter-batch !!!
+ */
 
-@Configuration
+//@Configuration
 @EnableBatchProcessing(dataSourceRef = "batchDataSource" ,
                        transactionManagerRef = "batchTransactionManager")
-public class JobRepositoryBatchConfig {
+public class OldExplicitJobRepositoryBatchConfig {
 	
 	/*
 	 NB: in application.properties

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Profile("xmlJobConfig")
-@ImportResource({"classpath:job/commonConfig.xml",
+@ImportResource({"classpath:job/globalCommonConfig.xml",
 	             "classpath:job/myHelloWorldJob.xml",
 	             "classpath:job/myHelloWorldWithParameterJob.xml",
 	             "classpath:job/insertIntoDbFromCsvJob.xml",
@@ -20,8 +20,13 @@ import org.springframework.context.annotation.Profile;
 	             "classpath:job/fromJsonToXmlJob.xml",
 	             "classpath:job/fromXmlToCsvJob.xml",
 	             "classpath:job/fromCsvToJsonJob.xml",
+	             "classpath:job/fromCsvToJsonWithRetryJob.xml",
+	             "classpath:job/fromCsvWithSkipErrorsToJsonJob.xml",
 	             "classpath:job/withMyTaskletJob.xml",
-	             "classpath:job/myFlowJobs.xml",
+	             "classpath:job/myCommonPrintTasklets.xml",
+	             "classpath:job/myFlowSequentialJob.xml",
+	             "classpath:job/myFlowConditionalJob.xml",
+	             "classpath:job/myFlowDecisionJob.xml",
 	             "classpath:job/myPartitionJob.xml"})
 public class SomeJobsFromXmlConfig {
 

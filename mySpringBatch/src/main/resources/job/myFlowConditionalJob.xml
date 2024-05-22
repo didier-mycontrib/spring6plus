@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch
+	https://www.springframework.org/schema/batch/spring-batch.xsd
+	http://www.springframework.org/schema/beans 
+	https://www.springframework.org/schema/beans/spring-beans.xsd">
+                                
+  
+ <!--  tasklet beans now in myCommonPrintTasklets.xml -->
+ 
+ 
+ <job id="mySimpleConditionalStepsJob" xmlns="http://www.springframework.org/schema/batch">  
+     
+	    <step  id="step1_of_mySimpleConditionalStepsJob" >  
+	        <tasklet   ref="printMessageWithDelayTaskletA" />        
+	        <next on="FAILED" to="step3_of_mySimpleConditionalStepsJob" />
+	        <!--  <next on="COMPLETED" to="step2_of_mySimpleConditionalStepsJob" />  -->
+	        <next on="*" to="step2_of_mySimpleConditionalStepsJob" />
+	    </step>
+
+	    <step  id="step2_of_mySimpleConditionalStepsJob" next="step3_of_mySimpleConditionalStepsJob">
+	        <tasklet   ref="printMessageWithDelayTaskletB" />
+	    </step>	
+	    
+	    <step  id="step3_of_mySimpleConditionalStepsJob" >
+	        <tasklet   ref="printMessageWithDelayTaskletC" />
+	    </step>    	 
+ </job>
+ 
+ 
+ </beans>

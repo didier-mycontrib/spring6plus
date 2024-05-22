@@ -34,14 +34,6 @@ public class HelloWorldJobConfig extends MyAbstractJobConfig{
     		.build();
   }
 
-  @Bean
-  public Step simplePrintMessageStep(PrintHelloWorldMessageTaskletBean printFixedHelloWorldMessageTasklet){
-    var name = "simplePrintMessageStep";
-    var stepBuilder = new StepBuilder(name, jobRepository);
-    return stepBuilder
-        .tasklet(printFixedHelloWorldMessageTasklet, this.batchTxManager)
-        .build();
-  }
-
-
+  //NB: simplePrintMessageStep is now in tp.mySpringBatch.step.java.SimplePrintMessageStep
+  
 }

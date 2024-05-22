@@ -1,7 +1,6 @@
 package tp.mySpringBatch.reader.java;
 
-import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.xml.StaxEventItemReader;
+import org.springframework.batch.item.ItemStreamReader;
 import org.springframework.batch.item.xml.builder.StaxEventItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +23,7 @@ public class MyXmlFilePersonReaderConfig {
 	 /*
 	 //V1 without builder:
 	  @Bean @Qualifier("xml")
-	  ItemReader<Person> personXmlFileItemReader() {
+	  ItemStreamReader<Person> personXmlFileItemReader() {
 
 		  //Create writer instance
 		  StaxEventItemReader<Person> itemReader = 
@@ -41,7 +40,7 @@ public class MyXmlFilePersonReaderConfig {
 	 
 	 //V2 with builder:
 	 @Bean(destroyMethod="") @Qualifier("xml")
-	  ItemReader<Person> personXmlFileItemReader() {
+	  ItemStreamReader<Person> personXmlFileItemReader() {
 
 		 var personXmlMarshaller = new Jaxb2Marshaller();
 		  personXmlMarshaller.setClassesToBeBound(new Class[] { Person.class });

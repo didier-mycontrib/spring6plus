@@ -73,7 +73,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
   }
   
   public void initDefaultJobName() {
-	  this.defaultJobName = "myHelloWorldJob";
+	  //this.defaultJobName = "myHelloWorldJob";
 	  //this.defaultJobName = "myHelloWorldWithParameterJob";
       //this.defaultJobName = "copyFromCsvToCsvJob";
 	  //this.defaultJobName = "fromFixedPosTxtToCsvJob";
@@ -86,7 +86,7 @@ public class MySpringBatchApplication implements CommandLineRunner {
 	  //this.defaultJobName = "insertIntoCsvFromDbJob";
 	  //this.defaultJobName = "withMyTaskletJob";
 	  //this.defaultJobName = "mySimpleSequentialStepsJob";
-	  //this.defaultJobName = "mySimpleConditionalStepsJob";
+	  this.defaultJobName = "mySimpleConditionalStepsJob";
 	  //this.defaultJobName = "myPartitionJob";
 	  //this.defaultJobName = "generateDbDataSetJob";
 	  //this.defaultJobName = "increaseEmployeeSalaryJob";

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/batch
+	https://www.springframework.org/schema/batch/spring-batch.xsd
+	http://www.springframework.org/schema/beans 
+	https://www.springframework.org/schema/beans/spring-beans.xsd">
+                                
+  
+  <bean id="printMessageWithDelayTaskletA" class="tp.mySpringBatch.tasklet.PrintMessageWithDelayTasklet">
+      <!--   <property name="message" value="AAAA_OK"/> -->
+        <property name="message" value="AAAA_ERROR"/> 
+      <property name="delay" value="2000"/>
+  </bean>
+  
+   <bean id="printMessageWithDelayTaskletA_OK" class="tp.mySpringBatch.tasklet.PrintMessageWithDelayTasklet">
+      <property name="message" value="AAAA_OK"/> 
+      <property name="delay" value="2000"/>
+  </bean>
+  
+  <bean id="printMessageWithDelayTaskletB" class="tp.mySpringBatch.tasklet.PrintMessageWithDelayTasklet">
+      <property name="message" value="BBBB"/>
+      <property name="delay" value="2000"/>
+  </bean>
+  
+  <bean id="printMessageWithDelayTaskletC" class="tp.mySpringBatch.tasklet.PrintMessageWithDelayTasklet">
+      <property name="message" value="CCCC"/>
+      <property name="delay" value="2000"/>
+  </bean>
+  
+ 
+ </beans>

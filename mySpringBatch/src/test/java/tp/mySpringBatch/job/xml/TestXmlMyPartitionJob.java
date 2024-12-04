@@ -39,16 +39,16 @@ public class TestXmlMyPartitionJob extends AbstractBasicActiveTestJob {
 	@Override
 	public void postJobCheckings(){
 	   this.verifSameContentExceptedResultFile(
-			   "data/expected_output/csv/outputData_1-5_withoutHeader.csv", 
+			   "data/expected_output/csv/outputData_1-5.csv", 
 			   "data/output/csv/outputData_1-5.csv");
 	   this.verifSameContentExceptedResultFile(
-			   "data/expected_output/csv/outputData_6-10_withoutHeader.csv", 
+			   "data/expected_output/csv/outputData_6-10.csv", 
 			   "data/output/csv/outputData_6-10.csv");
 	   this.verifSameContentExceptedResultFile(
-			   "data/expected_output/csv/outputData_11-15_withoutHeader.csv", 
+			   "data/expected_output/csv/outputData_11-15.csv", 
 			   "data/output/csv/outputData_11-15.csv");
 	   this.verifSameContentExceptedResultFile(
-			   "data/expected_output/csv/outputData_16-20_withoutHeader.csv", 
+			   "data/expected_output/csv/outputData_16-20.csv", 
 			   "data/output/csv/outputData_16-20.csv");
 	}
 

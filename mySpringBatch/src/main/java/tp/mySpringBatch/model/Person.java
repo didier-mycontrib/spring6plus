@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = "person") //just for read/generate XML file wkith jaxb2 marshaller
+@XmlRootElement(name = "person") //just for read/generate XML file with jaxb2 marshaller
 //implements Serializable just for serialize the execution context (if needed)
 public class Person implements Serializable{
 	private Long id; //auto-incremented in database (may be null before insert)

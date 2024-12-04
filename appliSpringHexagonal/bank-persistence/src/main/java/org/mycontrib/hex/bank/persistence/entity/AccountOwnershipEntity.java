@@ -14,7 +14,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter 
-@Table(name="account_ownersphip")
+@Table(name="account_ownership")
 @NamedQuery(name="AccountOwnershipEntity.accountListFromCustomerId",
             query="SELECT ao.account FROM AccountOwnershipEntity ao WHERE ao.pk.customerId=?1")
 public class AccountOwnershipEntity {
@@ -27,12 +27,12 @@ public class AccountOwnershipEntity {
 	private LocalDate endDate; //may be null
 	
 	@ManyToOne
-	@JoinColumn(name="accountId")
+	@JoinColumn(name="account_id")
 	@MapsId("accountId") //pk.accountId
 	private AccountEntity account;
 	
 	@ManyToOne
-	@JoinColumn(name="customerId")
+	@JoinColumn(name="customer_id")
 	@MapsId("customerId") //pk.customerId
 	private CustomerEntity customer;
 	

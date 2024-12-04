@@ -77,7 +77,7 @@ public class CompteController {
 		/*else*/
 		String message="";
 		try {
-			serviceCompte.transfer(virementForm.getMontant(),
+			serviceCompte.transfert(virementForm.getMontant(),
 					               virementForm.getNumCptDeb(), 
 					               virementForm.getNumCptCred());
 			message="virement bien effectué";

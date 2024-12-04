@@ -9,5 +9,6 @@ set MY_H2_DB_URL_JOBREPOSITORY=jdbc:h2:~/jobRepositoryDb
 
 set PATH="C:\Prog\java\eclipse-jee-2023-12\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.9.v20231028-0858\jre\bin"
 
+
 set H2_VERSION=2.2.224
 set H2_CLASSPATH=%MVN_REPOSITORY%\com\h2database\h2\%H2_VERSION%\h2-%H2_VERSION%.jar

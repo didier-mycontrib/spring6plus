@@ -41,7 +41,7 @@ public class TestXmlFromXmlToCsvJob extends AbstractBasicActiveTestJob {
 	@Override
 	public void postJobCheckings(){
 	   this.verifSameContentExceptedResultFile(
-			   "data/expected_output/csv/outputDataV1b_withoutHeader.csv", 
+			   "data/expected_output/csv/outputDataV1b.csv", 
 			   "data/output/csv/outputData.csv");
 	}
 }

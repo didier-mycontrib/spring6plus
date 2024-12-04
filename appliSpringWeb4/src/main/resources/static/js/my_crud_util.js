@@ -89,7 +89,7 @@ function onSelectRow(evt){
 	selectedRow = parentRow;
 	parentRow.style.color="blue";
 	let idSelected=parentRow.firstChild.innerText;
-	console.log("idSelecte="+idSelected);
+	console.log("idSelected="+idSelected);
 	searchById(idSelected);
 }
 

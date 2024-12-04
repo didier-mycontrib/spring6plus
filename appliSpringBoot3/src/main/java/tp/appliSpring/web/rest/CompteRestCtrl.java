@@ -92,7 +92,7 @@ public class CompteRestCtrl extends AbstractGenericRestCtrl<CompteDto,CompteDtoE
 	@PostMapping("virement")
 	public VirementDto postVirement(@RequestBody VirementDto virementDto) {
 		try {
-			serviceCompteWithDto.transfer(virementDto.getMontant(), Long.parseLong(virementDto.getNumCptDeb()),
+			serviceCompteWithDto.transfert(virementDto.getMontant(), Long.parseLong(virementDto.getNumCptDeb()),
 					Long.parseLong(virementDto.getNumCptCred()));
 			virementDto.setOk(true);
 			virementDto.setMessage("virement bien effectué");

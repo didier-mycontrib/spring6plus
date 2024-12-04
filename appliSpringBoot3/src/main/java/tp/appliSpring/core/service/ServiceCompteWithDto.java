@@ -15,7 +15,7 @@ public interface ServiceCompteWithDto extends GenericServiceWithDto<CompteDto,Co
 
 	List<CompteDto> searchAccountsWithMinimumBalance(Double soldeMini);
 
-	public void transfer(double montant, long numCptDeb, long numCptCred) throws SoldeInsuffisantException;
+	public void transfert(double montant, long numCptDeb, long numCptCred) throws SoldeInsuffisantException;
 	
 	boolean verifierPasDecouvert(long numCpt) throws NotFoundException;
 }

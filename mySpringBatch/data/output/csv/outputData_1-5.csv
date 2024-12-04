@@ -1,3 +1,4 @@
+id;firstname;lastname;age;active
 1;Jean;Bono;40;true
 2;Laurent;Houtan;30;false
 3;Alain;Verse;20;true

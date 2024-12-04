@@ -19,7 +19,7 @@
 					    <!-- nb: syntaxe th:field en *{...} pour selectionner une sous partie 
 					         de l'objet precisee par th:object du formulaire -->
 						<select th:field="*{numCptDeb}" class="form-control">
-	                          <option th:each ="cpt : ${comptes}" th:value="${cpt.numero}" th:utext="${cpt.numero} + ' - ' + ${cpt.label} + ' : ' + ${cpt.solde}"></option>
+	                          <option th:each ="cpt : ${listeComptes}" th:value="${cpt.numero}" th:utext="${cpt.numero} + ' - ' + ${cpt.label} + ' : ' + ${cpt.solde}"></option>
 	                    </select>
 					</div>
 				</div>
@@ -27,7 +27,7 @@
 					<label class="control-label text-sm-end col-sm-4">numCptCred:</label>
 					<div class="col-sm-8">
 						<select th:field="*{numCptCred}" class="form-control" > 
-	                         <option th:each ="cpt : ${comptes}" th:value="${cpt.numero}" th:utext="${cpt.numero} + ' - ' + ${cpt.label} + ' : ' + ${cpt.solde}"></option>
+	                         <option th:each ="cpt : ${listeComptes}" th:value="${cpt.numero}" th:utext="${cpt.numero} + ' - ' + ${cpt.label} + ' : ' + ${cpt.solde}"></option>
 	                    </select>
 					</div>
 				</div>

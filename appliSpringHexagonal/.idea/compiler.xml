@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bank-rest" />
+        <module name="kafka-client-app" />
+        <module name="bank-domain" />
+        <module name="bank-persistence" />
+        <module name="generic-domain" />
+        <module name="bank-app" />
+        <module name="bank-messaging" />
+        <module name="generic-util" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bank-app" options="-parameters" />
+      <module name="bank-domain" options="-parameters" />
+      <module name="bank-messaging" options="-parameters" />
+      <module name="bank-persistence" options="-parameters" />
+      <module name="bank-rest" options="-parameters" />
+      <module name="generic-domain" options="-parameters" />
+      <module name="generic-util" options="-parameters" />
+      <module name="kafka-client-app" options="-parameters" />
+    </option>
+  </component>
+</project>

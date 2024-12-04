@@ -37,7 +37,7 @@ public class TestXmlInsertIntoCsvFromDBJob extends AbstractBasicActiveTestJob {
 	@Override
 	public void postJobCheckings(){
 	   this.verifSameContentExceptedResultFile(
-			   "data/expected_output/csv/outputDataV2_withoutHeader.csv", 
+			   "data/expected_output/csv/outputDataV2.csv", 
 			   "data/output/csv/outputData.csv");
 	}
 
